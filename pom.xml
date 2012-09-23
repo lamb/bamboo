@@ -15,7 +15,7 @@
 		<version.maven-compiler-plugin>2.5.1</version.maven-compiler-plugin>
 		<version.maven-checkstyle-plugin>2.9.1</version.maven-checkstyle-plugin>
 		<version.maven-jetty-plugin>6.1.10</version.maven-jetty-plugin>
-		<server.port>8080</server.port>
+		<server.port>8888</server.port>
 		<server.seconds>20</server.seconds>
 
 
@@ -182,8 +182,8 @@
 					<configLocation>src/main/resources/etc/beyondtrack_checks.xml</configLocation>
 					<includeTestSourceDirectory>true</includeTestSourceDirectory>
 					<excludes>
-						com/qq/oauth/Config.java,
-						<!-- com/qq/util/*.java -->
+						com/**/*.java,
+						<!-- com/**/*.java -->
 					</excludes>
 					<consoleOutput>true</consoleOutput>
 					<failOnViolation>true</failOnViolation>
