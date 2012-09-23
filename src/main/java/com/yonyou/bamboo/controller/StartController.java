@@ -21,8 +21,9 @@ public class StartController {
     }
 
     @RequestMapping(value = "/start", method = RequestMethod.GET)
-    public void start() {
+    public String start() {
         System.out.println("start");
+        return "start";
     }
 
     @InitBinder

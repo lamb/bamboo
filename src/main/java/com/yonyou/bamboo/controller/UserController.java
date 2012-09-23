@@ -20,29 +20,27 @@ public class UserController {
     public String toAdd() {
         return "add";
     }
-    
+
     @RequestMapping(value = "/user", method = RequestMethod.POST)
     public String add(@Valid User user, BindingResult result) {
         System.out.println(user.getName() + user.getAge() + user.getDate());
-        if(result.hasErrors()){
-            List<FieldError> errors= result.getFieldErrors();
+        if (result.hasErrors()) {
+            List<FieldError> errors = result.getFieldErrors();
             for (FieldError error : errors) {
                 System.out.println(error.getDefaultMessage());
             }
         }
         return "redirect:sucess.do";
     }
-    
+
     @RequestMapping("sucess")
     public String sucess() {
         return "sucess";
     }
-    
-    
+
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), false));
     }
-    
-}
 
+}

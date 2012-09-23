@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class User {
     @NotEmpty
-    @Size(max=10,min=4)
+    @Size(max = 10, min = 4)
     private String name;
     @NotNull
     private int age;
