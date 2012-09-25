@@ -1,4 +1,4 @@
-package com.yonyou.bamboo.controller;
+package com.yonyou.bamboo.model;
 
 import java.util.Date;
 import javax.validation.constraints.NotNull;
