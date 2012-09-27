@@ -35,6 +35,7 @@ public class Sign {
 
     @RequestMapping(value = "/cookie", method = RequestMethod.GET)
     public String cookie(@CookieValue("SU") String su,BindingResult result) {
+        //TODO 为啥没有SU这个Cookie的时候404
         if (result.hasErrors()) {
             List<FieldError> errors = result.getFieldErrors();
             for (FieldError error : errors) {
