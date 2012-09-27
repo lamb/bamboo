@@ -1,40 +1,29 @@
 package com.yonyou.bamboo.model;
 
-import java.util.Date;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class User {
+
     @NotEmpty
-    @Size(max = 10, min = 4)
-    private String name;
-    @NotNull
-    private int age;
+    private String email;
 
-    private Date date;
+    @NotEmpty
+    private String password;
 
-    public Date getDate() {
-        return date;
+    public String getEmail() {
+        return email;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getName() {
-        return name;
+    public String getPassword() {
+        return password;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
 }
