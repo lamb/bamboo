@@ -18,6 +18,7 @@ public class Sign {
 
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
     public String signin(@Valid User user, HttpServletResponse response, BindingResult result) {
+        //TODO 前端页面验证
         if (result.hasErrors()) {
             List<FieldError> errors = result.getFieldErrors();
             for (FieldError error : errors) {
