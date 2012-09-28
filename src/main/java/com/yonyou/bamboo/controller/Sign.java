@@ -24,10 +24,15 @@ public class Sign {
                 System.out.println(error.getField() + error.getDefaultMessage());
             }
         } else {
-            Cookie cookie = new Cookie("SU", user.getEmail() + ":" + user.getPassword());
-            cookie.setPath("/");
-            cookie.setMaxAge(2 * 3600);
-            response.addCookie(cookie);
+            //TODO 登录后Cookie Session
+            if (true) {
+                Cookie cookie = new Cookie("SU", user.getEmail() + ":" + user.getPassword());
+                cookie.setPath("/");
+                cookie.setMaxAge(2 * 3600);
+                response.addCookie(cookie);
+            }else {
+                return "redirect:/";
+            }
         }
 
         return "redirect:/";
@@ -35,7 +40,7 @@ public class Sign {
 
     @RequestMapping(value = "/cookie", method = RequestMethod.GET)
     public String cookie(@CookieValue(value = "SU", required = false) String su) {
-        System.out.println("|" + su + "|");
+        System.out.println("|" + su + "|" + (su == null));
         return "redirect:/";
     }
 }
