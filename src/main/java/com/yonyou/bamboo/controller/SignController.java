@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.yonyou.bamboo.model.User;
 
 @Controller
-public class Sign {
+public class SignController {
 
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
     public String signin(@Valid User user, HttpServletResponse response, BindingResult result) {
