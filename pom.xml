@@ -15,6 +15,7 @@
 		<version.maven-compiler-plugin>2.5.1</version.maven-compiler-plugin>
 		<version.maven-checkstyle-plugin>2.9.1</version.maven-checkstyle-plugin>
 		<version.maven-jetty-plugin>6.1.10</version.maven-jetty-plugin>
+		<version.maven-resources-plugin>2.6</version.maven-resources-plugin>
 		<server.port>8888</server.port>
 		<server.seconds>20</server.seconds>
 
@@ -25,10 +26,9 @@
 		<!-- Spring version -->
 		<version.spring>3.1.2.RELEASE</version.spring>
 
-		<!-- Spring Third Party dependencies -->
+		<!-- Third Party dependencies -->
 		<version.aopalliance>1.0</version.aopalliance>
 		<version.standard.taglibs>1.1.2</version.standard.taglibs>
-		<version.commons.logging>1.1.1</version.commons.logging>
 		<version.servlet>2.5</version.servlet>
 		<version.commons-dbcp>1.4</version.commons-dbcp>
 		<version.mysql-connector-java>5.1.21</version.mysql-connector-java>
@@ -36,6 +36,10 @@
 		<!-- Test -->
 		<version.junit>4.8.2</version.junit>
 		<version.hamcrest>1.1</version.hamcrest>
+
+		<!-- Logging -->
+		<version.org.slf4j>1.6.1</version.org.slf4j>
+		<version.log4j>1.2.16</version.log4j>
 	</properties>
 
 	<dependencies>
@@ -127,11 +131,6 @@
 			<version>${version.standard.taglibs}</version>
 		</dependency>
 		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-			<version>${version.commons.logging}</version>
-		</dependency>
-		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 			<version>${version.commons-dbcp}</version>
@@ -140,6 +139,31 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${version.mysql-connector-java}</version>
+		</dependency>
+
+		<!-- Logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${version.org.slf4j}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${version.org.slf4j}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${version.org.slf4j}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${version.log4j}</version>
+			<scope>runtime</scope>
 		</dependency>
 
 		<!-- Test -->
@@ -179,7 +203,9 @@
 				</configuration>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
+				<version>${version.maven-resources-plugin}</version>
 				<configuration>
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
@@ -220,6 +246,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>${finalName}-${version}</finalName>
+		<finalName>${finalName}-${project.version}</finalName>
 	</build>
 </project>
