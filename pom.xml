@@ -8,7 +8,6 @@
 	<name>bamboo</name>
 	<url>http://auto.yonyou.com</url>
 	<properties>
-
 		<finalName>bamboo</finalName>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<version.jdk>1.6</version.jdk>
@@ -18,7 +17,6 @@
 		<version.maven-resources-plugin>2.6</version.maven-resources-plugin>
 		<server.port>8888</server.port>
 		<server.seconds>20</server.seconds>
-
 
 		<!-- hibernate-validator version -->
 		<version.hibernate-validator>4.3.0.Final</version.hibernate-validator>
@@ -43,7 +41,6 @@
 	</properties>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>

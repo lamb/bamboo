@@ -4,10 +4,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-
-    public boolean verifyPassword() {
+    
+    public boolean verifyPassword(String email, String password) {
         System.out.println("verify");
-        return false;
+        return email.equals(password);
     }
 
 }

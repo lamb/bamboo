@@ -30,7 +30,7 @@ public class SignController {
             }
         } else {
             //TODO 登录后Cookie Session
-            if (userService.verifyPassword()) {
+            if (userService.verifyPassword(user.getEmail(),user.getPassword())) {
                 Cookie cookie = new Cookie("SU", user.getEmail() + ":" + user.getPassword());
                 cookie.setPath("/");
                 cookie.setMaxAge(2 * 3600);
@@ -45,7 +45,6 @@ public class SignController {
 
     @RequestMapping(value = "/cookie", method = RequestMethod.GET)
     public String cookie(@CookieValue(value = "SU", required = false) String su) {
-        System.out.println("|" + su + "|" + (su == null));
         return "redirect:/";
     }
 }
