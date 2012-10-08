@@ -1,34 +1,37 @@
 package com.yonyou.bamboo.controller;
 
-import static org.junit.Assert.*;
+import static org.springframework.test.web.server.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.server.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.server.setup.MockMvcBuilders.standaloneSetup;
+import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.validation.BeanPropertyBindingResult;
-import org.springframework.validation.BindingResult;
-import com.yonyou.bamboo.model.User;
+import org.springframework.test.web.server.MockMvc;
+import org.springframework.test.web.server.setup.MockMvcBuilders;
 
 public class SignControllerTest {
 
-    @Test
-    public void testSignin() {
-        ApplicationContext context = new ClassPathXmlApplicationContext("../WEB-INF/spring-mvc-servlet.xml");
-        SignController controller = context.getBean(SignController.class);
-        // SignController controller = new SignController();
-        User user = new User();
-        user.setEmail("email#email.com");
-        user.setPassword("password");
-        BindingResult result = new BeanPropertyBindingResult(user, user.getClass().getName());
-        controller.signin(user, null, result);
-        fail("Not yet implemented");
+    private MockMvc mvc;
+
+    @Before
+    public void SetUp() {
+        mvc = MockMvcBuilders.xmlConfigSetup("file:src/main/webapp/WEB-INF/spring-mvc-servlet.xml").build();
     }
 
     @Test
-    public void testCookie() {
-        SignController controller = new SignController();
-        String su = null;
-        controller.cookie(su);
-        fail("Not yet implemented");
+    public void testSignin() throws Exception {
+        mvc.perform(post("/signin").param("email", "email@email.com").param("password", "password")).andExpect(status().isOk()).andExpect(redirectedUrl("/"));
+        mvc.perform(post("/signin").param("email", "email@email.com").param("password", "email@email.com")).andExpect(status().isOk()).andExpect(redirectedUrl("/"));
+    }
+
+    @Test
+    public void testSigninValid() throws Exception {
+        MockMvc m = standaloneSetup(new SignController()).build();
+        m.perform(post("/signin").param("email", "email@email.com")).andExpect(status().isOk()).andExpect(model().attributeHasFieldErrors("user", "password"));
+    }
+
+    @Test
+    public void testCookie() throws Exception {
+        mvc.perform(get("/cookie")).andExpect(status().isOk()).andExpect(redirectedUrl("/"));
     }
 
 }

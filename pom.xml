@@ -34,6 +34,7 @@
 		<!-- Test -->
 		<version.junit>4.8.2</version.junit>
 		<version.hamcrest>1.1</version.hamcrest>
+		<version.spring-test-mvc>1.0.0.M2</version.spring-test-mvc>
 
 		<!-- Logging -->
 		<version.org.slf4j>1.6.1</version.org.slf4j>
@@ -176,6 +177,18 @@
 			<version>${version.hamcrest}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${version.spring}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test-mvc</artifactId>
+			<version>${version.spring-test-mvc}</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -245,4 +258,19 @@
 		</plugins>
 		<finalName>${finalName}-${project.version}</finalName>
 	</build>
+
+	<repositories>
+		<repository>
+			<id>org.springframework.maven.milestone</id>
+			<name>Spring Maven Milestone Repository</name>
+			<url>http://maven.springframework.org/milestone</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
 </project>

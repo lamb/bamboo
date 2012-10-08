@@ -19,23 +19,23 @@ public class SignController {
 
     @Autowired
     private UserService userService;
-    
+
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
-    public String signin(@Valid User user, HttpServletResponse response, BindingResult result) {
-        //TODO 前端页面验证
+    public String signin(@Valid User user, BindingResult result, HttpServletResponse response) {
+        // TODO 前端页面验证
         if (result.hasErrors()) {
             List<FieldError> errors = result.getFieldErrors();
             for (FieldError error : errors) {
                 System.out.println(error.getField() + error.getDefaultMessage());
             }
         } else {
-            //TODO 登录后Cookie Session
-            if (userService.verifyPassword(user.getEmail(),user.getPassword())) {
+            // TODO 登录后Cookie Session
+            if (userService.verifyPassword(user.getEmail(), user.getPassword())) {
                 Cookie cookie = new Cookie("SU", user.getEmail() + ":" + user.getPassword());
                 cookie.setPath("/");
                 cookie.setMaxAge(2 * 3600);
                 response.addCookie(cookie);
-            }else {
+            } else {
                 return "redirect:/";
             }
         }
