@@ -47,4 +47,5 @@ public class SignController {
     public String cookie(@CookieValue(value = "SU", required = false) String su) {
         return "redirect:/";
     }
+    
 }
