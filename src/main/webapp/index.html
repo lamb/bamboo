@@ -68,30 +68,30 @@
 	    <h3 id="myModalLabel">注册</h3>
 	  </div>
 	  <div class="modal-body">
-			<form class="form-horizontal">
+			<form class="form-horizontal" id="registForm">
 			  <div class="control-group error">
 			    <label class="control-label" for="inputEmail">邮箱</label>
 			    <div class="controls">
-			      <input type="text" id="inputEmail" placeholder="您的邮箱帐号">
+			      <input name="email" type="text" id="inputEmail" placeholder="您的邮箱帐号">
 			      <span class="help-inline">验证结果</span>
 			    </div>
 			  </div>
 			  <div class="control-group success">
 			    <label class="control-label" for="inputPassword">密码</label>
 			    <div class="controls">
-			      <input type="password" id="inputPassword" placeholder="你的密码">
+			      <input name="password" type="password" id="inputPassword" placeholder="你的密码">
 			    </div>
 			  </div>
 			  <div class="control-group success">
 			    <label class="control-label" for="inputPassword">确认密码</label>
 			    <div class="controls">
-			      <input type="password" id="inputPassword" placeholder="你的密码">
+			      <input name="repassword" type="password" placeholder="你的密码">
 			    </div>
 			  </div>
 			  <div class="control-group">
 			  	<label class="control-label" for="inputPassword">验证码</label>
 			    <div class="controls">
-			      <input class="input-small" type="text" id="inputCaptcha" placeholder="请输入右侧的字符">
+			      <input name="captcha" class="input-small" type="text" id="inputCaptcha" placeholder="请输入右侧的字符">
 			      <img alt="" src="a.jpg" style="width: 90px;height: 30px;padding-left: 15px;">
 			    </div>
 			  </div>
@@ -110,5 +110,40 @@
 	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.10.0/localization/messages_zh.js"></script>
 	<script type="text/javascript" src="javascript/prettify/prettify.js"></script>
 	<script type="text/javascript" src="javascript/ready.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$("#registForm").validate({
+				"rules":{
+					email:{
+						required:true,
+						maxlength:100,
+						remote:{
+							url:"",
+							type:"get",
+							data:{
+								email:function(){
+									return $("#inputEmail").val();
+								}
+							},
+							dataFilter:function(data) {
+								if(data.result) {
+									
+								}
+							}
+						}
+					},
+					password:{
+						required:true,
+						maxlength:20,
+						minlength:6
+					},
+					repassword:{
+						equalTo:"#inputPassword"
+					},
+					captcha:"required"
+				}
+			});
+		});
+	</script>
 </body>
 </html>
