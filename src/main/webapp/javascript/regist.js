@@ -1,12 +1,4 @@
 $(function() {
-//	$.validator.setDefaults({
-//		submitHandler:function(){
-//			
-//		},
-//		showErrors:function(map, list) {
-//			
-//		}
-//	});
 	$("#registForm").validate({
 		"rules":{
 //			email:{
@@ -47,29 +39,29 @@ $(function() {
 			$(element).parent().parent().addClass("error");
 		},
 		success:function(label, element) {
-			element.parent().parent().removeClass("error").addClass("success");
-			element.next().html("");
+			$(element).parent().parent().removeClass("error").addClass("success");
+			$(element).nextAll("span.help-inline").html("");
 //			label.text("ok");
 		},
 		submitHandler:function(form) {
-		}
-	});
-	$("#registForm").ajaxForm({
-		dataType:"json",
-		beforeSerialize:function($form, options) {
-			
-		},
-		beforeSubmit:function(formData, jqForm, options) {
-		},
-		success:function(data) {
-			
-		},
-		error:function(jqXHR, textStatus, errorThrown) {
-			
+			$("#registForm").ajaxSubmit({
+				dataType:"json",
+				beforeSerialize:function($form, options) {
+					
+				},
+				beforeSubmit:function(formData, jqForm, options) {
+				},
+				success:function(data) {
+					
+				},
+				error:function(jqXHR, textStatus, errorThrown) {
+					
+				}
+			});
 		}
 	});
 	jQuery().ajaxStart(function() {
-		
+		$(".btn-primary").attr("disabled", true).addClass("disabled");
 	}).ajaxStop(function() {
 		
 	}).ajaxError(function(a, b, e) {
