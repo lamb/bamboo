@@ -1,9 +1,17 @@
 $(function() {
+//	$.validator.setDefaults({
+//		submitHandler:function(){
+//			
+//		},
+//		showErrors:function(map, list) {
+//			
+//		}
+//	});
 	$("#registForm").validate({
 		"rules":{
 //			email:{
 //				required:true,
-//				maxlength:100,
+//				email:true,
 //				remote:{
 //					url:"",
 //					type:"get",
@@ -25,17 +33,25 @@ $(function() {
 				minlength:6
 			},
 			repassword:{
+				required:true,
 				equalTo:"#inputPassword"
 			},
 			captcha:"required"
 		},
+//		errorElement:"span",
 		errorPlacement:function(error, element) {
-			element.parent().parent().addClass("error");
-			element.next().html(error.html());
+			element.nextAll("span.help-inline").html(error.html());
+//			error.appendTo(element.parent());
 		},
-		success:function(succ, element) {
-			element.parent().parent().removeClass("error");
+		highlight:function(element, errorClass) {
+			$(element).parent().parent().addClass("error");
+		},
+		success:function(label, element) {
+			element.parent().parent().removeClass("error").addClass("success");
 			element.next().html("");
+//			label.text("ok");
+		},
+		submitHandler:function(form) {
 		}
 	});
 	$("#registForm").ajaxForm({
@@ -51,5 +67,12 @@ $(function() {
 		error:function(jqXHR, textStatus, errorThrown) {
 			
 		}
+	});
+	jQuery().ajaxStart(function() {
+		
+	}).ajaxStop(function() {
+		
+	}).ajaxError(function(a, b, e) {
+		throw e;
 	});
 });
