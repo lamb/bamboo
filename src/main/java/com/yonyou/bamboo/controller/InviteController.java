@@ -20,7 +20,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.yonyou.bamboo.util.ResponseMsg;
 
 /**
  * bamboo InviteController
@@ -39,17 +42,17 @@ public class InviteController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String invite() {
 		
-		return null;
+		return "inviter";
 	}
 	/**
 	 * 发出邀请
 	 * @param email
 	 * @return
 	 */
-	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView invite(@RequestParam("email") String email) {
+	@RequestMapping(method = RequestMethod.POST) @ResponseBody
+	public ResponseMsg invite(@RequestParam("email") String email) {
 		
-		return null;
+		return new ResponseMsg().success();
 	}
 	/**
 	 * 接受邀请并去注册页面
