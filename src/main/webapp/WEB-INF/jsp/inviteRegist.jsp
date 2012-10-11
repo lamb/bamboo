@@ -51,14 +51,12 @@
 		    <label class="control-label" for="inputPassword">密码:</label>
 		    <div class="controls">
 		      <input name="password" type="password" id="inputPassword" placeholder="输入你的密码">
-		      <span class="help-inline"></span>
 		    </div>
 		  </div>
 		  <div class="control-group">
 		    <label class="control-label" for="inputPassword">确认密码:</label>
 		    <div class="controls">
 		      <input name="repassword" type="password" placeholder="再次输入密码">
-		      <span class="help-inline"></span>
 		    </div>
 		  </div>
 		  <div class="control-group">
@@ -66,7 +64,6 @@
 		    <div class="controls">
 		      <input name="captcha" class="input-small" type="text" id="inputCaptcha">
 		      <img alt="" src='<c:url value="/captcha" />' style="width: 90px;height: 30px;padding-left: 15px;">
-		      <span class="help-inline"></span>
 		    </div>
 		  </div>
 		  <div class="control-group">
