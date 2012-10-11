@@ -24,8 +24,53 @@
 			<bean class="com.yonyou.bamboo.interceptor.SigninInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
-
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="order" value="0" /><!-- 设置最高优先级 -->
+        <property name="defaultContentType" value="text/html" /><!--  -->
+        <property name="favorPathExtension" value="true" /><!-- 默认true，根据扩展名确定MIME类型 -->
+        <property name="favorParameter" value="false" /><!-- 默认false，通过请求参数确定MIME类型 ，默认参数是formate，可通过parameterName属性改变 -->
+        <property name="ignoreAcceptHeader" value="true" /><!-- 默认false，若以上步骤没确定MIME类型则根据请求报文头确定 -->
+        <property name="mediaTypes">
+            <description>favorPathExtension, favorParameter是true时才起作用 </description>
+            <map>
+                <entry key="html" value="text/html" />
+                <entry key="json" value="application/json" />
+                <entry key="xml" value="application/xml" />
+                <entry key="atom" value="application/atom+xml" />
+            </map>
+        </property>
+        <property name="defaultViews" >
+            <list>
+                <bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
+                    <property name="objectMapper" >
+                        <bean class="org.codehaus.jackson.map.ObjectMapper" >
+                            <property name="dateFormat" >
+                                <bean class="java.text.SimpleDateFormat" >
+                                    <constructor-arg value="yyyy-MM-dd" />
+                                </bean>
+                            </property>
+                        </bean>
+                    </property>
+                </bean>
+                <bean class="org.springframework.web.servlet.view.xml.MarshallingView">
+                    <property name="marshaller">
+                        <bean class="org.springframework.oxm.xstream.XStreamMarshaller" />
+                    </property>
+                </bean>
+            </list>
+        </property>
+        <!-- 
+        <property name="viewResolvers" >
+            <list>
+                <bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
+                <ref bean="viewResolver" />
+            </list>
+        </property>
+         -->
+    </bean>
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	    <property name="order" value="100" />
+<!--         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" /> -->
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
