@@ -81,10 +81,10 @@
 
 	<script type="text/javascript" src='<c:url value="/javascript/jquery/jquery-1.8.2.min.js" />'></script>
 	<script type="text/javascript" src='<c:url value="/bootstrap/js/bootstrap.min.js" />'></script>
-	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.10.0/jquery.validate.js"></script>
-<!-- 	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.10.0/additional-methods.js"></script> -->
-	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.10.0/localization/messages_zh.js"></script>
-	<script type="text/javascript" src="http://malsup.github.com/jquery.form.js"></script>
+	<script type="text/javascript" src='<c:url value="/javascript/jquery/validation/jquery.validate.js" />'></script>
+<!-- 	<script type="text/javascript" src='<c:url value="/javascript/jquery/validation/additional-methods.js" />'></script> -->
+	<script type="text/javascript" src='<c:url value="/javascript/jquery/validation/messages_zh.js" />'></script>
+	<script type="text/javascript" src='<c:url value="/javascript/jquery/form/jquery.form.js" />'></script>
 	<script type="text/javascript" src='<c:url value="/javascript/prettify/prettify.js" />'></script>
 	<script type="text/javascript" src='<c:url value="/javascript/regist.js" />'></script>
 </body>
