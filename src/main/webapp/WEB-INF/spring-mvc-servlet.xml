@@ -94,7 +94,7 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	<bean id="namedJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
-		<property name="dataSource" ref="dataSource" />
+		<constructor-arg ref="dataSource"/>
 	</bean>
 
 	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
