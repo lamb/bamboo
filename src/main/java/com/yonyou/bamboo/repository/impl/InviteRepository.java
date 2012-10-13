@@ -28,4 +28,10 @@ public class InviteRepository implements IInviteRepository {
 		namedJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(invite), keyHolder);
 		return keyHolder.getKey().intValue();
 	}
+	
+	public boolean checkEmailValid(String email) {
+		String sql = "select count(email) from invite where email=?";
+		int count = jdbcTemplate.queryForInt(sql, email);
+		return count == 0;
+	}
 }
