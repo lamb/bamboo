@@ -50,7 +50,7 @@
 						<bean class="org.codehaus.jackson.map.ObjectMapper">
 							<property name="dateFormat">
 								<bean class="java.text.SimpleDateFormat">
-									<constructor-arg value="yyyy-MM-dd" />
+									<constructor-arg value="yyyy-MM-dd hh:mm:ss" />
 								</bean>
 							</property>
 						</bean>
@@ -89,6 +89,11 @@
 
 	<bean id="namedJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
 		<constructor-arg ref="dataSource" />
+	</bean>
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	    <property name="host" value="" />
+	    <property name="username" value="" />
+	    <property name="password" value="" />
 	</bean>
 
 	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
