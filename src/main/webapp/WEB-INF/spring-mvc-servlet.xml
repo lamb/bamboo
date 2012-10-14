@@ -67,16 +67,21 @@
 		</property>
 	</bean>
 	<bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-	    <property name="templateLoaderPath" value="/WEB-INFO/freemarker/" />
+	    <property name="templateLoaderPath" value="/WEB-INF/ftl/" />
+	    <property name="defaultEncoding" value="UTF-8" />
+	    <property name="freemarkerSettings">
+	        <props>
+	            <prop key="classic_compatible">true</prop>
+	        </props>
+	    </property>
 	</bean>
 	<bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
 	    <property name="cache" value="true" />
 	    <property name="prefix" value="" />
-	    <property name="fuffix" value=".html" />
+	    <property name="suffix" value=".html" />
+	    <property name="contentType" value="text/html; charset=utf-8" />
 	</bean>
-
-	<!-- <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver"> <property 
-		name="cache" value="true" /> <property name="prefix" value="" /> <property name="suffix" value=".ftl" /> </bean> -->
+	
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basename" value="message" />
 		<property name="useCodeAsDefaultMessage" value="true" />
@@ -98,20 +103,47 @@
 	<bean id="namedJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
 		<constructor-arg ref="dataSource" />
 	</bean>
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-	    <property name="host" value="" />
-	    <property name="username" value="" />
-	    <property name="password" value="" />
-	</bean>
+	<bean class="com.yonyou.bamboo.util.MailSender" />
 
 	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	<!-- <tx:advice id="transactionAdvice" transaction-manager="txManager"> <tx:attributes> <tx:method name="save*" 
-		propagation="REQUIRED"/> <tx:method name="add*" propagation="REQUIRED"/> <tx:method name="create*" propagation="REQUIRED"/> 
-		<tx:method name="insert*" propagation="REQUIRED"/> <tx:method name="update*" propagation="REQUIRED"/> <tx:method 
-		name="merge*" propagation="REQUIRED"/> <tx:method name="del*" propagation="REQUIRED"/> <tx:method name="remove*" 
-		propagation="REQUIRED"/> <tx:method name="put*" propagation="REQUIRED"/> <tx:method name="use*" propagation="REQUIRED"/> 
-		<tx:method name="*" read-only="true" /> </tx:attributes> </tx:advice> <aop:aspectj-autoproxy /> <aop:config expose-proxy="true"> 
-		<aop:advisor advice-ref="transactionAdvice" pointcut="execution(* com.yonyou.bamboo.service..*.*(..))" /> </aop:config> -->
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="save*" propagation="REQUIRED"/>
+			<tx:method name="add*" propagation="REQUIRED"/>
+			<tx:method name="create*" propagation="REQUIRED"/>
+			<tx:method name="insert*" propagation="REQUIRED"/>
+			<tx:method name="update*" propagation="REQUIRED"/>
+			<tx:method name="merge*" propagation="REQUIRED"/>
+			<tx:method name="del*" propagation="REQUIRED"/>
+			<tx:method name="remove*" propagation="REQUIRED"/>
+			<tx:method name="put*" propagation="REQUIRED"/>
+			<tx:method name="use*" propagation="REQUIRED"/>
+			<tx:method name="*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+	<aop:aspectj-autoproxy />
+	<aop:config expose-proxy="true">
+		<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.yonyou.bamboo.service..*.*(..))" />
+	</aop:config>
+	
+	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor"></bean>
+<!-- 
+
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	    <property name="host" value="smtp.sohu.com" />
+	    <property name="username" value="bambooservice" />
+	    <property name="password" value="111111" />
+	    <property name="javaMailProperties">
+	        <props>
+	            <prop key="mail.smtp.auth">true</prop>
+	            <prop key="mail.smtp.timeout">25000</prop>
+	            <prop key="mail.smtp.socketFactory.port">25</prop>
+	            <prop key="mail.smtp.socketFactory.fallback"></prop>
+	            <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+	        </props>
+	    </property>
+	</bean>
+ -->
 </beans>
