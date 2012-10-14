@@ -2,6 +2,7 @@ package com.yonyou.bamboo.repository.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -33,5 +34,11 @@ public class InviteRepository implements IInviteRepository {
 		String sql = "select count(email) from invite where email=?";
 		int count = jdbcTemplate.queryForInt(sql, email);
 		return count == 0;
+	}
+	
+	public String getEmail(String inviteNo) {
+		String sql = "select email from invite where no=?";
+		String email = jdbcTemplate.queryForObject(sql, new Object[]{inviteNo}, String.class);
+		return email;
 	}
 }

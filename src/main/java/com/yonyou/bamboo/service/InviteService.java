@@ -47,10 +47,17 @@ public class InviteService {
 		}
 		final String no = UUID.randomUUID().toString().replace("-", "");
 		inviteRepository.save(email, no);
-		// TODO send email
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("url", "http://127.0.0.1:8080/bamboo/invite/"+no);
 		mailSender.send(email, "bamboo 邀请注册", "mail/invite.html", model);
 		log.info("邀请" + email);
+	}
+	
+	public String findEmailByInviteNo(String inviteNo) {
+		String email = inviteRepository.getEmail(inviteNo);
+		if (email == null) {
+			throw new RuntimeException("无效");
+		}
+		return email;
 	}
 }

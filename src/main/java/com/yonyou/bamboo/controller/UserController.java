@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yonyou.bamboo.model.User;
+import com.yonyou.bamboo.service.InviteService;
 import com.yonyou.bamboo.service.UserService;
 
 /**
@@ -37,6 +38,7 @@ import com.yonyou.bamboo.service.UserService;
 public class UserController {
 
 	@Autowired private UserService userService;
+	@Autowired private InviteService inviteService;
 	/**
 	 * 提交注册
 	 * @param user
@@ -54,10 +56,9 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/invite", method = RequestMethod.POST)
 	public ModelAndView inviteRegist(User user, @RequestParam("inviteNo") String inviteNo) {
-		// TODO 验证邀请码并查询出email放入user中
-		// TODO 保存user
+		user.setEmail(inviteService.findEmailByInviteNo(inviteNo));
 		userService.saveUser(user);
-		return null;
+		return new ModelAndView("message");
 	}
 	
 }
