@@ -97,6 +97,8 @@
 					success:function(data) {
 						if (data.result) {
 							alert("邀请成功");
+						} else {
+							alert(data.msg);
 						}
 					},
 					error:function(jqXHR, textStatus, errorThrown) {
