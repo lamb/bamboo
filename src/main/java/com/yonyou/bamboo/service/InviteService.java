@@ -19,17 +19,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.mail.internet.MimeMessage;
-
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
-import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import com.yonyou.bamboo.repository.impl.InviteRepository;
+import com.yonyou.bamboo.util.MailSender;
 
 /**
  * bamboo InviteService
@@ -41,27 +36,21 @@ import com.yonyou.bamboo.repository.impl.InviteRepository;
 @Service
 public class InviteService {
 
-	@Autowired private InviteRepository inviteRepository;
-	@Autowired private JavaMailSender mailSender;
-	@Autowired private FreeMarkerConfigurer freemarkerConfig;
+	private Logger log = Logger.getLogger(InviteService.class);
 	
-	public void invite(final String email) {
-		if(inviteRepository.checkEmailValid(email)) {
-			throw new RuntimeException("");// TODO 自定义异常
+	@Autowired private InviteRepository inviteRepository;
+	@Autowired private MailSender mailSender;
+	
+	public void addInvite(final String email) {
+		if(!inviteRepository.checkEmailValid(email)) {
+			throw new RuntimeException("邮件已经注册过");// TODO 自定义异常
 		}
-		String no = UUID.randomUUID().toString();
+		final String no = UUID.randomUUID().toString().replace("-", "");
 		inviteRepository.save(email, no);
 		// TODO send email
-		mailSender.send(new MimeMessagePreparator() {
-			@Override
-			public void prepare(MimeMessage mimeMessage) throws Exception {
-				MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
-				message.setTo(email);
-				message.setFrom("admin@noday.net");
-				Map<String, Object> model = new HashMap<String, Object>();
-				model.put("url", "");
-				message.setText(FreeMarkerTemplateUtils.processTemplateIntoString(freemarkerConfig.getConfiguration().getTemplate("template"), model), true);
-			}
-		});
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("url", "http://127.0.0.1:8080/bamboo/invite/"+no);
+		mailSender.send(email, "bamboo 邀请注册", "mail/invite.html", model);
+		log.info("邀请" + email);
 	}
 }

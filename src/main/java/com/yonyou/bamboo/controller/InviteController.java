@@ -15,6 +15,7 @@
  */
 package com.yonyou.bamboo.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.yonyou.bamboo.model.User;
+import com.yonyou.bamboo.service.InviteService;
 import com.yonyou.bamboo.util.ResponseMsg;
 
 /**
@@ -36,6 +38,7 @@ import com.yonyou.bamboo.util.ResponseMsg;
 @Controller @RequestMapping("/invite")
 public class InviteController {
 
+	@Autowired private InviteService inviteService;
 	/**
 	 * 邀请页面
 	 * @return
@@ -55,7 +58,11 @@ public class InviteController {
 	 */
 	@RequestMapping(method = RequestMethod.POST) @ResponseBody
 	public ResponseMsg invite(@RequestParam("email") String email) {
-		
+		try {
+			inviteService.addInvite(email);
+		} catch (Exception e) {
+			return new ResponseMsg().error(e.getMessage());
+		}
 		return new ResponseMsg().success();
 	}
 	/**
