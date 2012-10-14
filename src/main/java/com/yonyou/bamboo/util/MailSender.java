@@ -31,7 +31,6 @@ import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
-import com.yonyou.bamboo.exception.TemplateNotFoundException;
 import com.yonyou.bamboo.service.InviteService;
 
 import freemarker.template.Template;
