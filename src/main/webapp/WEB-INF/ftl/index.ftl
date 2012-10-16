@@ -2,9 +2,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<@head title="${webTitle}">
+<@head title="${appTitle}">
 <meta name="keywords" content="${metaKeywords}"/>
-<meta name="description" content="<#list articles as article>${article.articleTitle}<#if article_has_next>,</#if></#list>"/>
+<meta name="description" content=""/>
 </@head>
 </head>
 <body>
