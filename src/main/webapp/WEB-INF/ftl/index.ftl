@@ -11,6 +11,5 @@
 	<#include "header.ftl">
 	<#include "content.ftl">
 	<#include "footer.ftl">
-	${contextPath}
 </body>
 </html>

@@ -9,9 +9,9 @@
 					<li><a href="#contact">Contact</a></li>
 				</ul>
 				
-				<form class="navbar-form pull-right" action="signin" method="post">
-	              <input class="span2" type="text" name="email" placeholder="Email" />
-	              <input class="span2" type="password" name="password" placeholder="Password" />
+				<form id="signForm" class="navbar-form pull-right" action="${contextPath}/signin" method="post">
+	              <input class="span2" type="text" name="email" placeholder="Email" rel="popover" data-placement="bottom" />
+	              <input class="span2" type="password" name="password" placeholder="Password" rel="popover" data-placement="bottom" />
 	              <input type="submit" class="btn" value="登陆" />
 	            </form>
 			</div>
