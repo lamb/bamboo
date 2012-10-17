@@ -47,5 +47,9 @@ public class SignController {
     public String cookie(@CookieValue(value = "SU", required = false) String su) {
         return "redirect:/";
     }
+    @RequestMapping("/")
+    public String index() {
+    	return "index";
+    }
     
 }

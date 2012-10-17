@@ -39,8 +39,9 @@ public class StartupListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
     	ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(context = sce.getServletContext());
     	log.info("get spring ApplicationContext");
-    	setAppProperty();
-    	setSysProperty();
+    	setWebProperty();
+//    	setAppProperty();
+//    	setSysProperty();
     }
 
 	/**
@@ -58,16 +59,18 @@ public class StartupListener implements ServletContextListener {
     		setAttribute(AppConfiguration.KEY_ADMINEMAIL, config.getAdminEmail());
     		setAttribute(AppConfiguration.KEY_APPOWNER, config.getAppOwner());
         	setAttribute(AppConfiguration.KEY_staticresourceversion, Calendar.getInstance().toString());
-        	Resource r = new ClassPathResource("web.properties");
-        	Properties p = new Properties();
-        	try {
-				p.load(r.getInputStream());
-				setAttribute(AppConfiguration.KEY_staticservepath, p.get(AppConfiguration.KEY_staticservepath));
-				setAttribute(AppConfiguration.KEY_servepath, p.get(AppConfiguration.KEY_servepath));
-			} catch (IOException e) {
-				log.error("配置读取失败", e);
-				// TODO 应该启动失败才行
-			}
+		}
+    }
+    private void setWebProperty() {
+    	Resource r = new ClassPathResource("web.properties");
+    	Properties p = new Properties();
+    	try {
+			p.load(r.getInputStream());
+			setAttribute(AppConfiguration.KEY_staticservepath, p.get(AppConfiguration.KEY_staticservepath));
+			setAttribute(AppConfiguration.KEY_servepath, p.get(AppConfiguration.KEY_servepath));
+		} catch (IOException e) {
+			log.error("配置读取失败", e);
+			// TODO 应该启动失败才行
 		}
     }
     
