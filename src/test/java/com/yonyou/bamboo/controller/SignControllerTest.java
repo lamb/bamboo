@@ -14,7 +14,7 @@ public class SignControllerTest {
 
     @Before
     public void SetUp() {
-        mvc = MockMvcBuilders.xmlConfigSetup("file:src/main/webapp/WEB-INF/spring-mvc-servlet.xml").build();
+        mvc = MockMvcBuilders.xmlConfigSetup("classpath:bamboo-context.xml", "classpath:bamboo-servlet-context.xml").build();
     }
 
     @Test
