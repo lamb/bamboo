@@ -53,17 +53,17 @@ public class StartupListener implements ServletContextListener {
     	IAppRepository configRepo = ctx.getBean(IAppRepository.class);
     	AppConfiguration config = configRepo.getConfig();
     	if (config != null) {
-    		context.setAttribute(AppConfiguration.KEY_APPTITLE, config.getAppTitle());
-    		context.setAttribute(AppConfiguration.KEY_APPHOST, config.getAppHost());
-    		context.setAttribute(AppConfiguration.KEY_ADMINEMAIL, config.getAdminEmail());
-    		context.setAttribute(AppConfiguration.KEY_APPOWNER, config.getAppOwner());
-        	context.setAttribute(AppConfiguration.KEY_staticresourceversion, Calendar.getInstance().toString());
+    		setAttribute(AppConfiguration.KEY_APPTITLE, config.getAppTitle());
+    		setAttribute(AppConfiguration.KEY_APPHOST, config.getAppHost());
+    		setAttribute(AppConfiguration.KEY_ADMINEMAIL, config.getAdminEmail());
+    		setAttribute(AppConfiguration.KEY_APPOWNER, config.getAppOwner());
+        	setAttribute(AppConfiguration.KEY_staticresourceversion, Calendar.getInstance().toString());
         	Resource r = new ClassPathResource("web.properties");
         	Properties p = new Properties();
         	try {
 				p.load(r.getInputStream());
-				context.setAttribute(AppConfiguration.KEY_staticservepath, p.get(AppConfiguration.KEY_staticservepath));
-				context.setAttribute(AppConfiguration.KEY_servepath, p.get(AppConfiguration.KEY_servepath));
+				setAttribute(AppConfiguration.KEY_staticservepath, p.get(AppConfiguration.KEY_staticservepath));
+				setAttribute(AppConfiguration.KEY_servepath, p.get(AppConfiguration.KEY_servepath));
 			} catch (IOException e) {
 				log.error("配置读取失败", e);
 				// TODO 应该启动失败才行
@@ -72,6 +72,10 @@ public class StartupListener implements ServletContextListener {
     }
     
     private void setSysProperty() {
-    	context.setAttribute(AppConfiguration.KEY_year, Calendar.getInstance().toString());
+    	setAttribute(AppConfiguration.KEY_year, Calendar.getInstance().toString());
+    }
+    private void setAttribute(String key, Object value) {
+    	context.setAttribute(key, value);
+    	log.info("ServletContext add " + key + ":" + value);
     }
 }

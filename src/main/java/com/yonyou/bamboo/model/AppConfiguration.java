@@ -44,6 +44,9 @@ public class AppConfiguration implements Serializable {
 	private String appHost;
 	private String adminEmail;
 	private String appOwner;
+	public AppConfiguration() {
+		super();
+	}
 	public String getAppTitle() {
 		return appTitle;
 	}

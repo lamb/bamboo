@@ -16,8 +16,8 @@
 package com.yonyou.bamboo.repository.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.yonyou.bamboo.model.AppConfiguration;
@@ -33,7 +33,8 @@ import com.yonyou.bamboo.repository.IAppRepository;
 @Repository
 public class AppRepository implements IAppRepository {
 
-	private static final String SQL = "SELECT a.appTitle,a.appHost,a.adminEmail,a.appOwner FROM app_configuration a LIMIT 1;";
+	private static final String SQL = "SELECT a.appTitle,a.appHost,a.adminEmail,a.appOwner FROM app_configuration a LIMIT 1";
+	
 	@Autowired private JdbcTemplate jdbc;
 	
 	/* (non-Javadoc)
@@ -41,8 +42,8 @@ public class AppRepository implements IAppRepository {
 	 */
 	@Override
 	public AppConfiguration getConfig() {
-		AppConfiguration conf = (AppConfiguration) jdbc.query(SQL, new ParameterizedBeanPropertyRowMapper<AppConfiguration>());
-		return conf;
+		AppConfiguration config = jdbc.queryForObject(SQL, new BeanPropertyRowMapper<AppConfiguration>(AppConfiguration.class));
+		return config;
 	}
 
 }
