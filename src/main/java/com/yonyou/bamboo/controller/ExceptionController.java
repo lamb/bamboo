@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ExceptionController {
 
     @RequestMapping("/exception")
-    public @ResponseBody String exception() {
+    public String exception() {
         throw new IllegalStateException("Sorry!");
     }
-    
+
     @ExceptionHandler
-    public @ResponseBody String handle(IllegalStateException e) {
+    @ResponseBody
+    public String handle(IllegalStateException e) {
         return "IllegalStateException handled!";
     }
 
