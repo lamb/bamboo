@@ -22,6 +22,7 @@ import java.util.UUID;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.yonyou.bamboo.repository.impl.InviteRepository;
 import com.yonyou.bamboo.util.MailSender;
@@ -41,6 +42,7 @@ public class InviteService {
 	@Autowired private InviteRepository inviteRepository;
 	@Autowired private MailSender mailSender;
 	
+	@Transactional
 	public void addInvite(final String email) {
 		if(!inviteRepository.checkEmailValid(email)) {
 			throw new RuntimeException("邮件已经注册过");// TODO 自定义异常
