@@ -9,9 +9,8 @@
 <meta http-equiv="Window-target" content="_top" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<link href="${staticServePath}/bootstrap/css/bootstrap.min.css?${staticResourceVersion}" rel="stylesheet"/>
-<link href="${staticServePath}/bootstrap/css/bootstrap-responsive.css?${staticResourceVersion}" rel="stylesheet"/>
-<link href="${staticServePath}/css/style.css?${staticResourceVersion}" rel="stylesheet"/>
-<link href="${servePath}/blog-articles-feed.do" title="ATOM" type="application/atom+xml" rel="alternate" />
-<link rel="shortcut icon" type="image/png" href="${staticServePath}/favicon.png" />
+<link href="${contextPath}/bootstrap/css/bootstrap.min.css?${staticResourceVersion}" rel="stylesheet"/>
+<link href="${contextPath}/bootstrap/css/bootstrap-responsive.css?${staticResourceVersion}" rel="stylesheet"/>
+<link href="${contextPath}/css/style.css?${staticResourceVersion}" rel="stylesheet"/>
+<link rel="shortcut icon" type="image/png" href="${contextPath}/favicon.ico" />
 </#macro>
