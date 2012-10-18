@@ -2,13 +2,12 @@
 <meta charset="utf-8" />
 <title>${title}</title>
 <#nested>
-<meta name="author" content="B3log Team" />
-<meta name="generator" content="B3log" />
-<meta name="copyright" content="B3log" />
-<meta name="revised" content="B3log, ${year}" />
+<meta name="author" content="yonyou" />
+<meta name="generator" content="yonyou" />
+<meta name="copyright" content="yonyou" />
+<meta name="revised" content="yonyou" />
 <meta http-equiv="Window-target" content="_top" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
 <link href="${contextPath}/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="${contextPath}/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/>
 <link href="${contextPath}/css/style.css" rel="stylesheet"/>
