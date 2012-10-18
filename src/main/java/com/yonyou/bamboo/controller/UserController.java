@@ -28,37 +28,44 @@ import com.yonyou.bamboo.service.UserService;
 
 /**
  * bamboo UserController
- *
+ * 
  * @author <a href="http://www.noday.net">Noday</a>
  * @version , 2012-10-9
- * @since 
+ * @since
  */
 
-@Controller @RequestMapping("/u")
+@Controller
+@RequestMapping("/u")
 public class UserController {
 
-	@Autowired private UserService userService;
-	@Autowired private InviteService inviteService;
-	/**
-	 * 提交注册
-	 * @param user
-	 * @return
-	 */
-	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView regist(User user) {
-		
-		return null;
-	}
-	/**
-	 * 提交邀请注册
-	 * @param user
-	 * @return
-	 */
-	@RequestMapping(value = "/invite", method = RequestMethod.POST)
-	public ModelAndView inviteRegist(User user, @RequestParam("inviteNo") String inviteNo) {
-		user.setEmail(inviteService.findEmailByInviteNo(inviteNo));
-		userService.saveUser(user);
-		return new ModelAndView("message");
-	}
-	
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private InviteService inviteService;
+
+    /**
+     * 提交注册
+     * 
+     * @param user
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST)
+    public ModelAndView regist(User user) {
+
+        return null;
+    }
+
+    /**
+     * 提交邀请注册
+     * 
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = "/invite", method = RequestMethod.POST)
+    public ModelAndView inviteRegist(User user, @RequestParam("inviteNo") String inviteNo) {
+        user.setEmail(inviteService.findEmailByInviteNo(inviteNo));
+        userService.save(user);
+        return new ModelAndView("message");
+    }
+
 }
