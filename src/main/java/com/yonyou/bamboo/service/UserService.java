@@ -1,6 +1,7 @@
 package com.yonyou.bamboo.service;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -34,7 +35,12 @@ public class UserService {
     }
 
     @Transactional
-    public int save(User user) {
+    public int save(User user) throws NoSuchAlgorithmException {
+        Random random = new Random();
+        user.setSalt(random.nextInt(99999));
+        user.setPassword(CryptoUtil.digest(user.getPassword()));
+        user.setPassword(CryptoUtil.digest(user.getPassword() + user.getSalt()));
+        user.setUsername("yonyou");
         return userRepository.save(user);
     }
 

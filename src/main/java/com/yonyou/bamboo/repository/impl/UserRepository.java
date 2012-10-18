@@ -1,6 +1,7 @@
 package com.yonyou.bamboo.repository.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -25,7 +26,7 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public User get(String email) {
-        return jdbcTemplate.queryForObject("select * from user where email=?", User.class, email);
+        return jdbcTemplate.queryForObject("select * from user where email=?", new BeanPropertyRowMapper<User>(User.class), email);
     }
 
     @Override

@@ -15,6 +15,8 @@
  */
 package com.yonyou.bamboo.controller;
 
+import java.security.NoSuchAlgorithmException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,9 +62,10 @@ public class UserController {
      * 
      * @param user
      * @return
+     * @throws NoSuchAlgorithmException 
      */
     @RequestMapping(value = "/invite", method = RequestMethod.POST)
-    public ModelAndView inviteRegist(User user, @RequestParam("inviteNo") String inviteNo) {
+    public ModelAndView inviteRegist(User user, @RequestParam("inviteNo") String inviteNo) throws NoSuchAlgorithmException {
         user.setEmail(inviteService.findEmailByInviteNo(inviteNo));
         userService.save(user);
         return new ModelAndView("message");

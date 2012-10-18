@@ -26,13 +26,12 @@ public class SignController {
     private UserService userService;
 
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
-    @ResponseBody
     public String signin(@Valid User user, BindingResult result, HttpServletResponse response) throws NoSuchAlgorithmException {
-        StringBuffer msg = new StringBuffer();
+        // TODO 前端页面验证
         if (result.hasErrors()) {
             List<FieldError> errors = result.getFieldErrors();
             for (FieldError error : errors) {
-                msg.append(error.getField() + error.getDefaultMessage());
+                System.out.println(error.getField() + error.getDefaultMessage());
             }
         } else {
             user.setPassword(CryptoUtil.digest(user.getPassword()));
@@ -41,12 +40,9 @@ public class SignController {
                 cookie.setPath("/");
                 cookie.setMaxAge(2 * 3600);
                 response.addCookie(cookie);
-                msg.append("登陆成功");
-            }else {
-                msg.append("登陆失败");
             }
         }
-        return msg.toString();
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/cookie", method = RequestMethod.GET)

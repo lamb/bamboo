@@ -24,7 +24,7 @@ public class SigninInterceptor extends HandlerInterceptorAdapter {
         log.info("SigninInterceptor work");
         HttpSession session = request.getSession();
         Object object = session.getAttribute(Constants.SESSION_USER);
-        if (null != object) {
+        if (null == object) {
             Cookie[] cookies = request.getCookies();
             String su = CookieUtil.getValue(cookies, Constants.COOKIE_SU);
             if (null != su) {
