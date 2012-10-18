@@ -13,7 +13,7 @@
 		<version.jdk>1.6</version.jdk>
 		<version.maven-compiler-plugin>2.5.1</version.maven-compiler-plugin>
 		<version.maven-checkstyle-plugin>2.9.1</version.maven-checkstyle-plugin>
-		<version.maven-jetty-plugin>6.1.10</version.maven-jetty-plugin>
+		<version.maven-jetty-plugin>6.1.26</version.maven-jetty-plugin>
 		<version.maven-resources-plugin>2.6</version.maven-resources-plugin>
 		<server.port>8888</server.port>
 		<server.seconds>20</server.seconds>
