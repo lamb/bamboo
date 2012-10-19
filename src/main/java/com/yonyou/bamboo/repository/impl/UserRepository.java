@@ -37,4 +37,9 @@ public class UserRepository implements IUserRepository {
         return keyHolder.getKey().intValue();
     }
 
+    @Override
+    public int getSalt(String email) {
+        return jdbcTemplate.queryForInt("select salt from user where email=?", email);
+    }
+
 }

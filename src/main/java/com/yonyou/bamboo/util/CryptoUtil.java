@@ -7,6 +7,10 @@ public class CryptoUtil {
 
     public static final String ALGORITHM_SHA_1 = "SHA-1";
 
+    public static String digest(String password, Integer salt) throws NoSuchAlgorithmException {
+        return digest(digest(password) + salt);
+    }
+
     public static String digest(String key) throws NoSuchAlgorithmException {
         String digest = null;
         MessageDigest md = MessageDigest.getInstance(ALGORITHM_SHA_1);

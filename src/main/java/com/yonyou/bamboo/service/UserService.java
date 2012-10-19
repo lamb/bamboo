@@ -5,6 +5,7 @@ import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,14 +23,14 @@ public class UserService {
     public boolean verifyPassword(String email, String password) throws NoSuchAlgorithmException {
         boolean flag = false;
         try {
-            User user = userRepository.get(email);
-            if (null != user) {
-                password = CryptoUtil.digest(password + user.getSalt());
-                if (password.equals(user.getPassword())) {
+            String verify = userRepository.getPassword(email);
+            if (null != verify && null != password) {
+                if (password.equals(verify)) {
                     flag = true;
                 }
             }
         } catch (EmptyResultDataAccessException e) {
+        } catch (IncorrectResultSizeDataAccessException e) {
         }
         return flag;
     }
@@ -38,8 +39,7 @@ public class UserService {
     public int save(User user) throws NoSuchAlgorithmException {
         Random random = new Random();
         user.setSalt(random.nextInt(99999));
-        user.setPassword(CryptoUtil.digest(user.getPassword()));
-        user.setPassword(CryptoUtil.digest(user.getPassword() + user.getSalt()));
+        user.setPassword(CryptoUtil.digest(user.getPassword(), user.getSalt()));
         user.setUsername("yonyou");
         return userRepository.save(user);
     }
@@ -47,6 +47,17 @@ public class UserService {
     @Transactional(readOnly = true)
     public User get(String email) {
         return userRepository.get(email);
+    }
+
+    @Transactional(readOnly = true)
+    public int getSalt(String email) {
+        int salt = 99999;
+        try {
+            salt = userRepository.getSalt(email);
+        } catch (EmptyResultDataAccessException e) {
+        } catch (IncorrectResultSizeDataAccessException e) {
+        }
+        return salt;
     }
 
 }

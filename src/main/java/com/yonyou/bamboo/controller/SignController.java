@@ -34,7 +34,7 @@ public class SignController {
                 System.out.println(error.getField() + error.getDefaultMessage());
             }
         } else {
-            user.setPassword(CryptoUtil.digest(user.getPassword()));
+            user.setPassword(CryptoUtil.digest(user.getPassword(), userService.getSalt(user.getEmail())));
             if (userService.verifyPassword(user.getEmail(), user.getPassword())) {
                 Cookie cookie = new Cookie(Constants.COOKIE_SU, user.getEmail() + ":" + user.getPassword());
                 cookie.setPath("/");

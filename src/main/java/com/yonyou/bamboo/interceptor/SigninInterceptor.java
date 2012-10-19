@@ -16,6 +16,7 @@ import com.yonyou.bamboo.util.CookieUtil;
 public class SigninInterceptor extends HandlerInterceptorAdapter {
 
     private static Logger log = Logger.getLogger(SigninInterceptor.class);
+    
     @Autowired
     private UserService userService;
 
@@ -35,6 +36,7 @@ public class SigninInterceptor extends HandlerInterceptorAdapter {
                 }
             }
         }
+        log.info("SigninInterceptor Done!");
         return super.preHandle(request, response, handler);
     }
 }

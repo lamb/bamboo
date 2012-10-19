@@ -8,6 +8,8 @@ public interface IUserRepository {
 
     public User get(String email);
     
+    public int getSalt(String email);
+    
     public int save(User user);
 
 }
