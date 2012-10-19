@@ -1,6 +1,7 @@
-<div class="container">
-
-	<h1>Bootstrap starter template</h1>
+<div class="container ">
+  <div class="row-fluid">
+    <div class="span9">
+      	<h1>Bootstrap starter template</h1>
 	<p>
 		Use this document as a way to quick start any new project.<br/>
 		All you get is this message and a barebones HTML document.
@@ -18,4 +19,11 @@ SELECT * FROM users WHERE id IN (1, 2.0, +30e-1);
 select * from user-table where id in (x, y, z);
 	    </code>
 	</pre>
+    </div>
+    <div class="span3">
+    	<#if user??>
+    	<#include "user.ftl">
+    	</#if>
+    </div>
+  </div>
 </div>
