@@ -55,12 +55,6 @@ public class ModuleRepository {
 		return m;
 	}
 	
-	public Module load(long id) {
-		String sql = "select * from module a where a.id=?";
-		Module m = jdbcTemplate.queryForObject(sql, Module.class, id);
-		return m;
-	}
-	
 	public List<Module> findAll() {
 		String sql = "select * from module";
 		List<Module> list = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Module>(Module.class));
@@ -75,15 +69,15 @@ public class ModuleRepository {
 	
 	public void update(Module module) {
 		String sql = "update module set project_id=:projectId,name=:name" +
-				",update_by=:updateBy,update_date=:updateDate where id=:id";
+				",modify_by=:modifyBy,modify_date=:modifyDate where id=:id";
 		namedJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(module));
 	}
 	
 	public void delete(Module module) {
-		delete(module.getId());
+		deleteById(module.getId());
 	}
 	
-	public void delete(long id) {
+	public void deleteById(long id) {
 		String sql = "delete from module where id=?";
 		jdbcTemplate.update(sql, id);
 	}

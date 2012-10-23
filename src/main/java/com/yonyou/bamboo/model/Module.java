@@ -37,8 +37,8 @@ public class Module implements Serializable {
 	private String name;
 	private Long createBy;
 	private Date createDate;
-	private Long updateBy;
-	private Date updateDate;
+	private Long modifyBy;
+	private Date modifyDate;
 	public Long getId() {
 		return id;
 	}
@@ -69,17 +69,17 @@ public class Module implements Serializable {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-	public Long getUpdateBy() {
-		return updateBy;
+	public Long getModifyBy() {
+		return modifyBy;
 	}
-	public void setUpdateBy(Long updateBy) {
-		this.updateBy = updateBy;
+	public void setModifyBy(Long modifyBy) {
+		this.modifyBy = modifyBy;
 	}
-	public Date getUpdateDate() {
-		return updateDate;
+	public Date getModifyDate() {
+		return modifyDate;
 	}
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
 	}
 
 }
