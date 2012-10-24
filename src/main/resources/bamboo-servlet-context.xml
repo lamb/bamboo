@@ -34,6 +34,18 @@
 		<property name="contentType" value="text/html; charset=utf-8" />
 	</bean>
 
+	<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="objectMapper">
+			<bean class="org.codehaus.jackson.map.ObjectMapper">
+				<property name="dateFormat">
+					<bean class="java.text.SimpleDateFormat">
+						<constructor-arg value="yyyy-MM-dd hh:mm:ss" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basename" value="message" />
 		<property name="useCodeAsDefaultMessage" value="true" />
