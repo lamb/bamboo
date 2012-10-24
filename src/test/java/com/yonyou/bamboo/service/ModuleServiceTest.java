@@ -17,9 +17,11 @@ package com.yonyou.bamboo.service;
 
 import java.util.Calendar;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -37,10 +39,20 @@ import com.yonyou.bamboo.model.Module;
 public class ModuleServiceTest {
 
 	@Autowired private ModuleService moduleService;
+	private long id;
 	
-	@Test public void testSave(Module module) {
+	@Before public void setUp() {
 		Module m = new Module();
 		m.setName("xx模块");
+		m.setProjectId(1l);
+		m.setCreateBy(2l);
+		m.setCreateDate(Calendar.getInstance().getTime());
+		id = moduleService.save(m);
+	}
+	
+	@Test @Rollback public void testSave() {
+		Module m = new Module();
+		m.setName("xx模块2");
 		m.setProjectId(1l);
 		m.setCreateBy(2l);
 		m.setCreateDate(Calendar.getInstance().getTime());
@@ -48,7 +60,7 @@ public class ModuleServiceTest {
 	}
 	
 	@Test public void testGet() {
-		moduleService.get(1l);
+		moduleService.get(id);
 	}
 	
 	@Test public void testFindByProject() {
@@ -57,12 +69,13 @@ public class ModuleServiceTest {
 	
 	@Test public void testModify() {
 		Module m = new Module();
-		m.setName("xx模块");
+		m.setId(id);
+		m.setName("xx模块修改");
 		m.setModifyBy(1l);
 		moduleService.modify(m);
 	}
 	
 	@Test public void testDelete() {
-		moduleService.deleteById(1);
+		moduleService.deleteById(id);
 	}
 }

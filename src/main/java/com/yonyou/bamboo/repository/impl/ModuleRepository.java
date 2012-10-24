@@ -51,7 +51,7 @@ public class ModuleRepository {
 	
 	public Module get(long id) {
 		String sql = "select * from module a where a.id=?";
-		Module m = jdbcTemplate.queryForObject(sql, Module.class, id);
+		Module m = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<Module>(Module.class), id);
 		return m;
 	}
 	
@@ -63,7 +63,7 @@ public class ModuleRepository {
 	
 	public List<Module> findByProject(long projectId) {
 		String sql = "select * from module a where a.project_id=?";
-		List<Module> list = jdbcTemplate.queryForList(sql, Module.class, projectId);
+		List<Module> list = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Module>(Module.class), projectId);
 		return list;
 	}
 	
