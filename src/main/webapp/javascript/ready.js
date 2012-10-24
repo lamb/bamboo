@@ -2,6 +2,6 @@ $(document).ready(function() {
   $('code, pre').addClass('prettyprint');
   prettyPrint();
 
-  $('#project').validate('list');
-  
+  $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
+
 });
