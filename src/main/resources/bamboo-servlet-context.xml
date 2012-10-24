@@ -21,7 +21,7 @@
 	<mvc:default-servlet-handler />
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/*" />
+			<mvc:mapping path="/**" />
 			<bean class="com.yonyou.bamboo.interceptor.SigninInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
