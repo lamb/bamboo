@@ -4,57 +4,57 @@ import java.util.Date;
 
 public class Feature {
 
-    int id;
-    int versionId;
-    int moduleId;
-    String checkpoint;
+    Integer id;
+    Integer versionId;
+    Integer moduleId;
+    String checkpoInteger;
     String reason;
-    int type;
-    int alpha;
+    Integer type;
+    Integer alpha;
     Date alphaDate;
-    int beta;
+    Integer beta;
     Date betaDate;
-    int uat;
+    Integer uat;
     Date uatDate;
     String dmlUpgrade;
     String dmlRollback;
     String ddlUpgrade;
     String ddlRollback;
-    int createBy;
+    Integer createBy;
     Date createDate;
-    int modifyBy;
+    Integer modifyBy;
     Date modifyDate;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getVersionId() {
+    public Integer getVersionId() {
         return versionId;
     }
 
-    public void setVersionId(int versionId) {
+    public void setVersionId(Integer versionId) {
         this.versionId = versionId;
     }
 
-    public int getModuleId() {
+    public Integer getModuleId() {
         return moduleId;
     }
 
-    public void setModuleId(int moduleId) {
+    public void setModuleId(Integer moduleId) {
         this.moduleId = moduleId;
     }
 
-    public String getCheckpoint() {
-        return checkpoint;
+    public String getCheckpoInteger() {
+        return checkpoInteger;
     }
 
-    public void setCheckpoint(String checkpoint) {
-        this.checkpoint = checkpoint;
+    public void setCheckpoInteger(String checkpoInteger) {
+        this.checkpoInteger = checkpoInteger;
     }
 
     public String getReason() {
@@ -65,19 +65,19 @@ public class Feature {
         this.reason = reason;
     }
 
-    public int getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
-    public int getAlpha() {
+    public Integer getAlpha() {
         return alpha;
     }
 
-    public void setAlpha(int alpha) {
+    public void setAlpha(Integer alpha) {
         this.alpha = alpha;
     }
 
@@ -89,11 +89,11 @@ public class Feature {
         this.alphaDate = alphaDate;
     }
 
-    public int getBeta() {
+    public Integer getBeta() {
         return beta;
     }
 
-    public void setBeta(int beta) {
+    public void setBeta(Integer beta) {
         this.beta = beta;
     }
 
@@ -105,11 +105,11 @@ public class Feature {
         this.betaDate = betaDate;
     }
 
-    public int getUat() {
+    public Integer getUat() {
         return uat;
     }
 
-    public void setUat(int uat) {
+    public void setUat(Integer uat) {
         this.uat = uat;
     }
 
@@ -153,11 +153,11 @@ public class Feature {
         this.ddlRollback = ddlRollback;
     }
 
-    public int getCreateBy() {
+    public Integer getCreateBy() {
         return createBy;
     }
 
-    public void setCreateBy(int createBy) {
+    public void setCreateBy(Integer createBy) {
         this.createBy = createBy;
     }
 
@@ -169,11 +169,11 @@ public class Feature {
         this.createDate = createDate;
     }
 
-    public int getModifyBy() {
+    public Integer getModifyBy() {
         return modifyBy;
     }
 
-    public void setModifyBy(int modifyBy) {
+    public void setModifyBy(Integer modifyBy) {
         this.modifyBy = modifyBy;
     }
 
