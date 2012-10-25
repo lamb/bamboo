@@ -7,23 +7,23 @@ import javax.validation.constraints.NotNull;
 
 public class Project {
 
-    int id;
+    Integer id;
     @NotNull(message = "项目名称不能为空！")
     @Size(max = 100, message = "项目名称最大长度为100")
-    //@Pattern(regexp = "[\u4e00-\u9fa5]+", message = "项目名称必须为中文")
+    // @Pattern(regexp = "[\u4e00-\u9fa5]+", message = "项目名称必须为中文")
     String name;
     @Size(max = 100, message = "英文缩写最大长度为100")
     String abbr;
-    int createBy;
+    Integer createBy;
     Date createDate;
-    int modifyBy;
+    Integer modifyBy;
     Date modifyDate;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -43,11 +43,11 @@ public class Project {
         this.abbr = abbr;
     }
 
-    public int getCreateBy() {
+    public Integer getCreateBy() {
         return createBy;
     }
 
-    public void setCreateBy(int createBy) {
+    public void setCreateBy(Integer createBy) {
         this.createBy = createBy;
     }
 
@@ -59,11 +59,11 @@ public class Project {
         this.createDate = createDate;
     }
 
-    public int getModifyBy() {
+    public Integer getModifyBy() {
         return modifyBy;
     }
 
-    public void setModifyBy(int modifyBy) {
+    public void setModifyBy(Integer modifyBy) {
         this.modifyBy = modifyBy;
     }
 

@@ -4,7 +4,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class User {
 
-    private Long id;
+    private Integer id;
     private String username;
     @NotEmpty
     private String email;
@@ -12,11 +12,11 @@ public class User {
     private String password;
     private Integer salt;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

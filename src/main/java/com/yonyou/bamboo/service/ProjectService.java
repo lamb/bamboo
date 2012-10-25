@@ -18,4 +18,23 @@ public class ProjectService {
         return projectRepository.list();
     }
 
+    @Transactional
+    public int save(Project project) {
+        return projectRepository.save(project);
+    }
+
+    @Transactional(readOnly = true)
+    public Project query(int id) {
+        return projectRepository.query(id);
+    }
+
+    @Transactional
+    public int update(Project project) {
+        return projectRepository.update(project);
+    }
+
+    @Transactional
+    public int delete(Project project) {
+        return projectRepository.delete(project);
+    }
 }
