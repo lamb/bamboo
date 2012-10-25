@@ -11,13 +11,14 @@
 	  <div class="control-group">
 	    <label class="control-label" for="name">项目名称</label>
 	    <div class="controls">
-	      <input type="text" id="name" name="name" placeholder="项目名称" required maxlength="100"/>
+	      <input type="text" id="name" name="name" placeholder="项目名称">
+	      <span class="label label-important">Please correct the error</span>
 	    </div>
 	  </div>
 	  <div class="control-group">
 	    <label class="control-label" for="abbr">英文缩写</label>
 	    <div class="controls">
-	      <input type="text" id="abbr" name="abbr" placeholder="英文缩写" required maxlength="100"/>
+	      <input type="text" id="abbr" name="abbr" placeholder="英文缩写">
 	    </div>
 	  </div>
 	  <div class="control-group">
