@@ -1,17 +1,3 @@
-/* jqBootstrapValidation
- * A plugin for automating validation on Twitter Bootstrap formatted forms.
- * 
- * v1.3.3
- *
- * http://ReactiveRaven.github.com/jqBootstrapValidation/
- */
-
-/* This program is free software. It comes without any warranty, to
- * the extent permitted by applicable law. You can redistribute it
- * and/or modify it under the terms of the Do What The Fuck You Want
- * To Public License, Version 2, as published by Sam Hocevar. See
- * http://sam.zoy.org/wtfpl/COPYING for more details. */
-
 (function($) {
 
   var createdElements = [];
@@ -20,7 +6,7 @@
     options : {
       sniffHtml : true, // sniff for 'required', 'maxlength', etc
       preventSubmit : true, // stop the form submit event from firing if
-                            // validation fails
+      // validation fails
       submitError : false,
       submitSuccess : false,
       autoAdd : {
@@ -62,7 +48,7 @@
             }
             $form.addClass("error");
             if ($.isFunction(settings.options.submitError)) {
-              settings.options.submitError($form, e, $inputs.jqBootstrapValidation("collectErrors", true));
+              settings.options.submitError($form, e, $inputs.validate("collectErrors", true));
             }
           } else {
             $form.removeClass("error");
@@ -240,7 +226,7 @@
               var newValidatorNamesToInspect = [];
 
               do // repeatedly expand 'shortcut' validators into their real
-                  // validators
+              // validators
               {
                 // Uppercase only the first letter of each name
                 $.each(validatorNames, function(i, el) {
@@ -555,7 +541,7 @@
                 setTimeout(function() {
                   rrjqbvThis.trigger("change.validation");
                 }, 1); // doesn't need a long timeout, just long enough for the
-                        // event bubble to burst
+                // event bubble to burst
               }
             });
           }
@@ -602,7 +588,7 @@
                   setTimeout(function() {
                     $this.trigger("change.validation");
                   }, 1); // doesn't need a long timeout, just long enough for
-                          // the event bubble to burst
+                  // the event bubble to burst
                 }
               },
               failure : function() {
@@ -615,7 +601,7 @@
                 setTimeout(function() {
                   $this.trigger("change.validation");
                 }, 1); // doesn't need a long timeout, just long enough for the
-                        // event bubble to burst
+                // event bubble to burst
               }
             });
           }
@@ -860,21 +846,21 @@
     return context[func].apply(this, args);
   }
 
-  $.fn.jqBootstrapValidation = function(method) {
+  $.fn.validate = function(method) {
 
     if (defaults.methods[method]) {
       return defaults.methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
     } else if (typeof method === 'object' || !method) {
       return defaults.methods.init.apply(this, arguments);
     } else {
-      $.error('Method ' + method + ' does not exist on jQuery.jqBootstrapValidation');
+      $.error('Method ' + method + ' does not exist on jQuery.validate');
       return null;
     }
 
   };
 
-  $.jqBootstrapValidation = function(options) {
-    $(":input").not("[type=image],[type=submit]").jqBootstrapValidation(options);
+  $.validate = function(options) {
+    $(":input").not("[type=image],[type=submit]").validate(options);
   }
 
 })(jQuery);
