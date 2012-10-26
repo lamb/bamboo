@@ -1,6 +1,7 @@
 package com.yonyou.bamboo.jdbc;
 
 import static org.junit.Assert.*;
+import java.util.Date;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,7 @@ public class TemplateTest {
         project.setName("中文");
         project.setAbbr("ZHONGWEN");
         project.setModifyBy(-1);
+        project.setModifyDate(new Date());
         template.insert(project);
     }
 

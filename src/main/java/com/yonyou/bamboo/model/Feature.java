@@ -10,10 +10,14 @@ public class Feature {
     String checkpoInteger;
     String reason;
     Integer type;
+    Integer hide;
     Integer alpha;
+    Integer alphaBy;
     Date alphaDate;
+    Integer betaBy;
     Integer beta;
     Date betaDate;
+    Integer uatBy;
     Integer uat;
     Date uatDate;
     String dmlUpgrade;

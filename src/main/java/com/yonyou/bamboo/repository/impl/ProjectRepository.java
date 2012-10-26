@@ -3,9 +3,6 @@ package com.yonyou.bamboo.repository.impl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import com.yonyou.bamboo.jdbc.Template;
 import com.yonyou.bamboo.model.Project;
@@ -24,10 +21,7 @@ public class ProjectRepository implements IProjectRepository {
 
     @Override
     public int save(Project project) {
-        String sql = "insert into project(name, abbr, create_by, create_date) values(:name, :abbr, :createBy, now())";
-        KeyHolder keyHolder = new GeneratedKeyHolder();
-        template.update(sql, new BeanPropertySqlParameterSource(project), keyHolder);
-        return keyHolder.getKey().intValue();
+        return template.insert(project);
     }
 
     @Override
