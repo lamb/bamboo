@@ -83,6 +83,7 @@ public class Template extends JdbcTemplate {
         return namedJdbcTemplate.query(queryJoin(t), new BeanPropertySqlParameterSource(t), new BeanPropertyRowMapper<T>(type));
     }
 
+    //TODO Template这个类还需要重构
     private <T> String queryJoin(T t) {
         StringBuffer sql = new StringBuffer();
         sql.append(SELECT).append(SPACE).append(ASTERISK).append(SPACE);
