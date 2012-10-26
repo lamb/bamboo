@@ -34,7 +34,7 @@ public class UserServiceTest {
         User user = new User();
         user.setEmail("gaoyang_auto@yonyou.com");
         user.setPassword("123456");
-        int id = userService.save(user);
-        System.out.println("id=" + id);
+        //int id = userService.save(user);
+        //System.out.println("id=" + id);
     }
 }
