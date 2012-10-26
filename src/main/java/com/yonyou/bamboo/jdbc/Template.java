@@ -115,22 +115,28 @@ public class Template extends JdbcTemplate {
     }
 
     public <T> int update(T where, T t) {
-        StringBuffer sql = new StringBuffer();
-        sql.append(UPDATE).append(SPACE).append(where.getClass().getSimpleName().toLowerCase()).append(SPACE);
-        sql.append(SET).append(SPACE);
+        StringBuffer top = new StringBuffer();
+        top.append(UPDATE).append(SPACE).append(where.getClass().getSimpleName().toLowerCase()).append(SPACE);
+        top.append(SET).append(SPACE);
         PropertyDescriptor[] pds = BeanUtils.getPropertyDescriptors(t.getClass());
         BeanWrapper beanWrapper = PropertyAccessorFactory.forBeanPropertyAccess(t);
+        int count = 0;
         for (int i = 0; i < pds.length; i++) {
             PropertyDescriptor pd = pds[i];
             String name = pd.getName();
             if (!CLASS.equals(name) && beanWrapper.isReadableProperty(name) && beanWrapper.getPropertyValue(name) != null) {
-                sql.append(underscoreName(name)).append(SPACE);
-                sql.append(EQUAL).append(SPACE).append(COLON).append(name).append(SPACE);
-                //FIXME update project set abbr = :abbr , where 1=1 and id = :id bug!!!
-                if (i < pds.length - 1) {
-                    sql.append(COMMA).append(SPACE);
-                }
+                top.append(underscoreName(name)).append(SPACE);
+                top.append(EQUAL).append(SPACE).append(COLON).append(name).append(SPACE);
+                top.append(COMMA).append(SPACE);
+                count++;
             }
+        }
+        StringBuffer sql = new StringBuffer();
+        if (count <= 0) {
+            log.error("no values for update");
+            return 0;
+        } else {
+            sql.append(top.toString().substring(0, top.lastIndexOf(COMMA)));
         }
         sql.append(WHERE).append(SPACE).append(IDENTICAL).append(SPACE);
         parameterJoin(where, sql);
@@ -162,23 +168,26 @@ public class Template extends JdbcTemplate {
         bot.append(VALUES).append(LEFT_BRACKET);
         PropertyDescriptor[] pds = BeanUtils.getPropertyDescriptors(t.getClass());
         BeanWrapper beanWrapper = PropertyAccessorFactory.forBeanPropertyAccess(t);
+        int count = 0;
         for (int i = 0; i < pds.length; i++) {
             PropertyDescriptor pd = pds[i];
             String name = pd.getName();
             if (!CLASS.equals(name) && beanWrapper.isReadableProperty(name) && beanWrapper.getPropertyValue(name) != null) {
-                top.append(underscoreName(name));
-                bot.append(COLON).append(name);
-                if (i < pds.length - 1) {
-                    bot.append(COMMA).append(SPACE);
-                    top.append(COMMA).append(SPACE);
-                }
+                top.append(underscoreName(name)).append(COMMA).append(SPACE);
+                bot.append(COLON).append(name).append(COMMA).append(SPACE);
+                count++;
             }
         }
-        top.append(RIGHT_BRACKET);
-        bot.append(RIGHT_BRACKET);
-        String sql = top.append(bot).toString();
+        StringBuffer sql = new StringBuffer();
+        if (count <= 0) {
+            log.error("no values for insert");
+            return 0;
+        } else {
+            sql.append(top.toString().substring(0, top.lastIndexOf(COMMA))).append(RIGHT_BRACKET);
+            sql.append(bot.toString().substring(0, bot.lastIndexOf(COMMA))).append(RIGHT_BRACKET);
+        }
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        this.update(sql, new BeanPropertySqlParameterSource(t), keyHolder);
+        this.update(sql.toString(), new BeanPropertySqlParameterSource(t), keyHolder);
         return keyHolder.getKey().intValue();
     }
 

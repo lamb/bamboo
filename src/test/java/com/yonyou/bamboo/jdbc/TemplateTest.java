@@ -4,13 +4,13 @@ import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.is;
 import java.util.Date;
 import java.util.List;
+import javax.sql.DataSource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import com.yonyou.bamboo.model.Project;
+import com.yonyou.bamboo.model.Jdbc;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:bamboo-context.xml")
@@ -19,72 +19,98 @@ public class TemplateTest {
     @Autowired
     private Template template;
 
+    @Autowired
+    private DataSource dataSource;
+
+    //TODO before先建立这样一张测试表，after再删除
+    
     @Test
     public void testTemplate() {
-        fail("Not yet implemented");
+        new Template();
     }
 
     @Test
     public void testTemplateDataSource() {
-        fail("Not yet implemented");
+        new Template(dataSource);
     }
 
     @Test
     public void testTemplateDataSourceBoolean() {
-        fail("Not yet implemented");
+        new Template(dataSource, false);
     }
 
     @Test
     public void testInitNamedJdbcTemplate() {
-        fail("Not yet implemented");
     }
 
     @Test
     public void testUpdateStringSqlParameterSourceKeyHolder() {
-        fail("Not yet implemented");
     }
 
     @Test
     public void testQuery() throws Exception {
-        Project project = new Project();
-        List<Project> projects = template.query(project, Project.class);
-        assertThat(projects.size() >= 0, is(true));
-        System.out.println(projects.size());
+        Jdbc jdbc = new Jdbc();
+        List<Jdbc> jdbcs = template.query(jdbc, Jdbc.class);
+        int count = template.queryForInt("select count(id) from jdbc");
+        assertThat(jdbcs.size(), is(count));
+        Jdbc j = new Jdbc();
+        j.setAbbr("sfjsljfsoeifjsljflsjfeijfslfjieiwlzncxkkfdksl");
+        jdbcs = template.query(j, Jdbc.class);
+        assertThat(jdbcs.size(), is(0));
     }
 
     @Test
     public void testQueryForObject() throws Exception {
-        Project project = new Project();
-        assertNull(template.queryForObject(project, Project.class));
-        project.setId(1);
-        assertNotNull(template.queryForObject(project, Project.class));
-        project.setId(99999999);
-        assertNull(template.queryForObject(project, Project.class));
+        Jdbc jdbc = new Jdbc();
+        assertNull(template.queryForObject(jdbc, Jdbc.class));
+        Jdbc j = new Jdbc();
+        j.setAbbr("testQueryForObject");
+        j.setName("testQueryForObject");
+        j.setContent("testQueryForObject");
+        j.setCreateBy(-1);
+        j.setCreateDate(new Date());
+        jdbc.setId(template.insert(j));
+        assertNotNull(template.queryForObject(jdbc, Jdbc.class));
+        jdbc.setId(99999999);
+        assertNull(template.queryForObject(jdbc, Jdbc.class));
     }
 
     @Test
     public void testInsert() throws Exception {
-        Project project = new Project();
-        project.setName("中文");
-        project.setAbbr("ZHONGWEN");
-        project.setModifyBy(-1);
-        project.setModifyDate(new Date());
-        // template.insert(project);
+        Jdbc jdbc = new Jdbc();
+        jdbc.setModifyDate(new Date());
+        int id = template.queryForInt("select max(id) + 1 from jdbc");
+        assertThat(template.insert(jdbc), is(id));
+        Jdbc j = new Jdbc();
+        j.setAbbr("ZHONGWEN");
+        id = template.queryForInt("select max(id) + 1 from jdbc");
+        assertThat(template.insert(j), is(id));
+        Jdbc empty = new Jdbc();
+        assertThat(template.insert(empty), is(0));
     }
 
     @Test
     public void testDelete() throws Exception {
-        Project project = new Project();
-        project.setId(999999);
-        assertThat(template.delete(project), is(0));
+        Jdbc jdbc = new Jdbc();
+        jdbc.setId(999999);
+        assertThat(template.delete(jdbc), is(0));
     }
 
     @Test
     public void testUpdate() throws Exception {
-        Project where = new Project();
+        Jdbc where = new Jdbc();
         where.setId(999999);
-        Project project = new Project();
-        project.setAbbr("aa");
-        assertThat(template.update(where, project), is(0));
+        Jdbc jdbc = new Jdbc();
+        jdbc.setAbbr("aa");
+        jdbc.setName("bbbb");
+        assertThat(template.update(where, jdbc), is(0));
+        Jdbc j = new Jdbc();
+        j.setAbbr("aa");
+        assertThat(template.update(where, j), is(0));
+        Jdbc jd = new Jdbc();
+        jd.setName("bbbb");
+        assertThat(template.update(where, jd), is(0));
+        Jdbc jdb = new Jdbc();
+        assertThat(template.update(where, jdb), is(0));
     }
 }
