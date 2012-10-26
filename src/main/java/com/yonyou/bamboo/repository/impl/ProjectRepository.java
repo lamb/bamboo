@@ -2,7 +2,6 @@ package com.yonyou.bamboo.repository.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 import com.yonyou.bamboo.jdbc.Template;
 import com.yonyou.bamboo.model.Project;
@@ -15,8 +14,8 @@ public class ProjectRepository implements IProjectRepository {
     Template template;
 
     @Override
-    public List<Project> list() {
-        return template.query("select * from project", new BeanPropertyRowMapper<Project>(Project.class));
+    public List<Project> query(Project project, Class<Project> type) {
+        return template.query(project, type);
     }
 
     @Override
@@ -25,8 +24,8 @@ public class ProjectRepository implements IProjectRepository {
     }
 
     @Override
-    public Project query(int id) {
-        return template.queryForObject("select * from project where id=?", new BeanPropertyRowMapper<Project>(Project.class), id);
+    public Project queryForObject(Project project, Class<Project> type) {
+        return template.queryForObject(project, type);
     }
 
     @Override

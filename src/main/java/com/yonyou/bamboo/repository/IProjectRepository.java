@@ -6,11 +6,11 @@ import com.yonyou.bamboo.model.Project;
 
 public interface IProjectRepository {
 
-    public List<Project> list();
+    public List<Project> query(Project project, Class<Project> type);
 
     public int save(Project project);
 
-    public Project query(int id);
+    public Project queryForObject(Project project, Class<Project> type);
 
     public int update(Project project);
 

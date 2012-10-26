@@ -14,8 +14,8 @@ public class ProjectService {
     IProjectRepository projectRepository;
 
     @Transactional(readOnly = true)
-    public List<Project> list() {
-        return projectRepository.list();
+    public List<Project> query(Project project, Class<Project> type) {
+        return projectRepository.query(project, type);
     }
 
     @Transactional
@@ -24,8 +24,8 @@ public class ProjectService {
     }
 
     @Transactional(readOnly = true)
-    public Project query(int id) {
-        return projectRepository.query(id);
+    public Project queryForObject(Project project, Class<Project> type) {
+        return projectRepository.queryForObject(project, type);
     }
 
     @Transactional

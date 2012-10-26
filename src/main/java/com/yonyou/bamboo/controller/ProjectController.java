@@ -27,14 +27,14 @@ public class ProjectController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String list(Model model) {
-        List<Project> projects = projectService.list();
+        List<Project> projects = projectService.query(new Project(), Project.class);
         model.addAttribute("projects", projects);
         return "project/list";
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String show(@PathVariable int id, Model model) {
-        Project project = projectService.query(id);
+    public String show(@PathVariable int id, Project query, Model model) {
+        Project project = projectService.queryForObject(query, Project.class);
         model.addAttribute("project", project);
         return "project/show";
     }
@@ -59,8 +59,8 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/{id}/modify", method = RequestMethod.GET)
-    public String modify(@PathVariable int id, Model model) {
-        Project project = projectService.query(id);
+    public String modify(@PathVariable int id, Project query, Model model) {
+        Project project = projectService.queryForObject(query, Project.class);
         model.addAttribute("project", project);
         return "project/modify";
     }
