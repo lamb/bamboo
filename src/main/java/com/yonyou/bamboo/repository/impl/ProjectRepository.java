@@ -36,7 +36,6 @@ public class ProjectRepository implements IProjectRepository {
 
     @Override
     public int delete(Project project) {
-        String sql = "delete from project where id = ?";
-        return template.update(sql, project.getId());
+        return template.delete(project);
     }
 }

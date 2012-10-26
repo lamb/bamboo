@@ -72,4 +72,19 @@ public class TemplateTest {
         // template.insert(project);
     }
 
+    @Test
+    public void testDelete() throws Exception {
+        Project project = new Project();
+        project.setId(999999);
+        assertThat(template.delete(project), is(0));
+    }
+
+    @Test
+    public void testUpdate() throws Exception {
+        Project where = new Project();
+        where.setId(999999);
+        Project project = new Project();
+        project.setAbbr("aa");
+        assertThat(template.update(where, project), is(0));
+    }
 }

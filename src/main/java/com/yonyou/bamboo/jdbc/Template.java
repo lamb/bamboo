@@ -40,6 +40,9 @@ public class Template extends JdbcTemplate {
     public static final String IDENTICAL = "1=1";
     public static final String EQUAL = "=";
     public static final String AND = "and";
+    public static final String DELETE = "delete";
+    public static final String UPDATE = "update";
+    public static final String SET = "set";
 
     private NamedParameterJdbcTemplate namedJdbcTemplate;
 
@@ -96,6 +99,60 @@ public class Template extends JdbcTemplate {
             }
         }
         return sql.toString();
+    }
+
+    private <T> void parameterJoin(T t, StringBuffer sql) {
+        PropertyDescriptor[] pds = BeanUtils.getPropertyDescriptors(t.getClass());
+        BeanWrapper beanWrapper = PropertyAccessorFactory.forBeanPropertyAccess(t);
+        for (int i = 0; i < pds.length; i++) {
+            PropertyDescriptor pd = pds[i];
+            String name = pd.getName();
+            if (!CLASS.equals(name) && beanWrapper.isReadableProperty(name) && beanWrapper.getPropertyValue(name) != null) {
+                sql.append(AND).append(SPACE).append(underscoreName(name)).append(SPACE);
+                sql.append(EQUAL).append(SPACE).append(COLON).append(name).append(SPACE);
+            }
+        }
+    }
+
+    public <T> int update(T where, T t) {
+        StringBuffer sql = new StringBuffer();
+        sql.append(UPDATE).append(SPACE).append(where.getClass().getSimpleName().toLowerCase()).append(SPACE);
+        sql.append(SET).append(SPACE);
+        PropertyDescriptor[] pds = BeanUtils.getPropertyDescriptors(t.getClass());
+        BeanWrapper beanWrapper = PropertyAccessorFactory.forBeanPropertyAccess(t);
+        for (int i = 0; i < pds.length; i++) {
+            PropertyDescriptor pd = pds[i];
+            String name = pd.getName();
+            if (!CLASS.equals(name) && beanWrapper.isReadableProperty(name) && beanWrapper.getPropertyValue(name) != null) {
+                sql.append(underscoreName(name)).append(SPACE);
+                sql.append(EQUAL).append(SPACE).append(COLON).append(name).append(SPACE);
+                //FIXME update project set abbr = :abbr , where 1=1 and id = :id bug!!!
+                if (i < pds.length - 1) {
+                    sql.append(COMMA).append(SPACE);
+                }
+            }
+        }
+        sql.append(WHERE).append(SPACE).append(IDENTICAL).append(SPACE);
+        parameterJoin(where, sql);
+        System.out.println(sql.toString());
+        return namedJdbcTemplate.update(sql.toString(), new BeanPropertySqlParameterSource(t));
+    }
+
+    public <T> int delete(T t) {
+        StringBuffer sql = new StringBuffer();
+        sql.append(DELETE).append(SPACE).append(FROM).append(SPACE).append(t.getClass().getSimpleName().toLowerCase()).append(SPACE);
+        sql.append(WHERE).append(SPACE).append(IDENTICAL).append(SPACE);
+        PropertyDescriptor[] pds = BeanUtils.getPropertyDescriptors(t.getClass());
+        BeanWrapper beanWrapper = PropertyAccessorFactory.forBeanPropertyAccess(t);
+        for (int i = 0; i < pds.length; i++) {
+            PropertyDescriptor pd = pds[i];
+            String name = pd.getName();
+            if (!CLASS.equals(name) && beanWrapper.isReadableProperty(name) && beanWrapper.getPropertyValue(name) != null) {
+                sql.append(AND).append(SPACE).append(underscoreName(name)).append(SPACE);
+                sql.append(EQUAL).append(SPACE).append(COLON).append(name).append(SPACE);
+            }
+        }
+        return namedJdbcTemplate.update(sql.toString(), new BeanPropertySqlParameterSource(t));
     }
 
     public <T> int insert(T t) {
