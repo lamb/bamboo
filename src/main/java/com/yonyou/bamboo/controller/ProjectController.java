@@ -75,7 +75,9 @@ public class ProjectController {
         } else {
             project.setId(id);
             project.setModifyBy(user.getId());
-            projectService.update(project);
+            Project where = new Project();
+            where.setId(id);
+            projectService.update(where, project);
         }
         return "redirect:";
     }

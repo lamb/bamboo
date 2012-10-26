@@ -29,9 +29,8 @@ public class ProjectRepository implements IProjectRepository {
     }
 
     @Override
-    public int update(Project project) {
-        String sql = "update project set name = ?, abbr = ?, modify_by = ?, modify_date = now() where id = ?";
-        return template.update(sql, project.getName(), project.getAbbr(), project.getModifyBy(), project.getId());
+    public int update(Project where, Project project) {
+        return template.update(where, project);
     }
 
     @Override

@@ -29,8 +29,8 @@ public class ProjectService {
     }
 
     @Transactional
-    public int update(Project project) {
-        return projectRepository.update(project);
+    public int update(Project where, Project project) {
+        return projectRepository.update(where, project);
     }
 
     @Transactional

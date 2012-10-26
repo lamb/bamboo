@@ -12,7 +12,7 @@ public interface IProjectRepository {
 
     public Project queryForObject(Project project, Class<Project> type);
 
-    public int update(Project project);
+    public int update(Project where, Project project);
 
     public int delete(Project project);
 
