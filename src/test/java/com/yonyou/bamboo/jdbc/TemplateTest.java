@@ -62,7 +62,6 @@ public class TemplateTest {
     @Test
     public void testQueryForObject() throws Exception {
         Jdbc jdbc = new Jdbc();
-        assertNull(template.queryForObject(jdbc, Jdbc.class));
         Jdbc j = new Jdbc();
         j.setAbbr("testQueryForObject");
         j.setName("testQueryForObject");
@@ -71,8 +70,6 @@ public class TemplateTest {
         j.setCreateDate(new Date());
         jdbc.setId(template.insert(j));
         assertNotNull(template.queryForObject(jdbc, Jdbc.class));
-        jdbc.setId(99999999);
-        assertNull(template.queryForObject(jdbc, Jdbc.class));
     }
 
     @Test

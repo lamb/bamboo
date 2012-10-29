@@ -1,0 +1,23 @@
+package com.yonyou.bamboo.util;
+
+import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.is;
+import javax.servlet.http.Cookie;
+import org.junit.Test;
+
+public class CookieUtilTest {
+
+    @Test
+    public void testGetValue() {
+        new CookieUtil();
+        Cookie[] cookies = new Cookie[5];
+        for (int i = 0; i < cookies.length; i++) {
+            Cookie cookie = new Cookie("c" + i, "c" + i);
+            cookies[i] = cookie;
+        }
+        assertThat(CookieUtil.getValue(cookies, "c3"), is("c3"));
+        assertNull(CookieUtil.getValue(cookies, null));
+        assertNull(CookieUtil.getValue(null, "c3"));
+    }
+
+}
