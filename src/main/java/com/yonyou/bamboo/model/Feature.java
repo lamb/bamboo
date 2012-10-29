@@ -7,7 +7,7 @@ public class Feature {
     Integer id;
     Integer versionId;
     Integer moduleId;
-    String checkpoInteger;
+    String checkpoint;
     String reason;
     Integer type;
     Integer hide;
@@ -53,12 +53,12 @@ public class Feature {
         this.moduleId = moduleId;
     }
 
-    public String getCheckpoInteger() {
-        return checkpoInteger;
+    public String getCheckpoint() {
+        return checkpoint;
     }
 
-    public void setCheckpoInteger(String checkpoInteger) {
-        this.checkpoInteger = checkpoInteger;
+    public void setCheckpoint(String checkpoint) {
+        this.checkpoint = checkpoint;
     }
 
     public String getReason() {
@@ -77,6 +77,14 @@ public class Feature {
         this.type = type;
     }
 
+    public Integer getHide() {
+        return hide;
+    }
+
+    public void setHide(Integer hide) {
+        this.hide = hide;
+    }
+
     public Integer getAlpha() {
         return alpha;
     }
@@ -91,6 +99,14 @@ public class Feature {
 
     public void setAlphaDate(Date alphaDate) {
         this.alphaDate = alphaDate;
+    }
+
+    public Integer getAlphaBy() {
+        return alphaBy;
+    }
+
+    public void setAlphaBy(Integer alphaBy) {
+        this.alphaBy = alphaBy;
     }
 
     public Integer getBeta() {
@@ -109,6 +125,14 @@ public class Feature {
         this.betaDate = betaDate;
     }
 
+    public Integer getBetaBy() {
+        return betaBy;
+    }
+
+    public void setBetaBy(Integer betaBy) {
+        this.betaBy = betaBy;
+    }
+
     public Integer getUat() {
         return uat;
     }
@@ -123,6 +147,14 @@ public class Feature {
 
     public void setUatDate(Date uatDate) {
         this.uatDate = uatDate;
+    }
+
+    public Integer getUatBy() {
+        return uatBy;
+    }
+
+    public void setUatBy(Integer uatBy) {
+        this.uatBy = uatBy;
     }
 
     public String getDmlUpgrade() {

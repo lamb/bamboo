@@ -1,33 +1,29 @@
 package com.yonyou.bamboo.model;
 
-import static org.junit.Assert.*;
-
+import org.junit.Before;
 import org.junit.Test;
 
 public class UserTest {
 
-    @Test
-    public void testGetEmail() {
-        new User().getEmail();
-        fail("Not yet implemented");
+    private User user;
+
+    @Before
+    public void setUp() throws Exception {
+        user = new User();
     }
 
     @Test
-    public void testSetEmail() {
-        new User().setEmail("email@email.com");
-        fail("Not yet implemented");
-    }
-
-    @Test
-    public void testGetPassword() {
-        new User().getPassword();
-        fail("Not yet implemented");
-    }
-
-    @Test
-    public void testSetPassword() {
-        new User().setPassword("password");
-        fail("Not yet implemented");
+    public void testUser() {
+        user.getId();
+        user.getEmail();
+        user.getPassword();
+        user.getUsername();
+        user.getSalt();
+        user.setId(1);
+        user.setEmail("111");
+        user.setPassword("111");
+        user.setUsername("username");
+        user.setSalt(74328);
     }
 
 }

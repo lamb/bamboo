@@ -29,53 +29,61 @@ import com.yonyou.bamboo.model.Module;
 
 /**
  * bamboo ModuleServiceTest
- *
+ * 
  * @author <a href="http://www.noday.net">Noday</a>
  * @version , 2012-10-23
- * @since 
+ * @since
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:bamboo-context.xml")
 public class ModuleServiceTest {
 
-	@Autowired private ModuleService moduleService;
-	private long id;
-	
-	@Before public void setUp() {
-		Module m = new Module();
-		m.setName("xx模块");
-		m.setProjectId(1l);
-		m.setCreateBy(2l);
-		m.setCreateDate(Calendar.getInstance().getTime());
-		id = moduleService.save(m);
-	}
-	
-	@Test @Rollback public void testSave() {
-		Module m = new Module();
-		m.setName("xx模块2");
-		m.setProjectId(1l);
-		m.setCreateBy(2l);
-		m.setCreateDate(Calendar.getInstance().getTime());
-		moduleService.save(m);
-	}
-	
-	@Test public void testGet() {
-		moduleService.get(id);
-	}
-	
-	@Test public void testFindByProject() {
-		moduleService.findByProject(1);
-	}
-	
-	@Test public void testModify() {
-		Module m = new Module();
-		m.setId(id);
-		m.setName("xx模块修改");
-		m.setModifyBy(1l);
-		moduleService.modify(m);
-	}
-	
-	@Test public void testDelete() {
-		moduleService.deleteById(id);
-	}
+    @Autowired
+    private ModuleService moduleService;
+    private int id;
+
+    @Before
+    public void setUp() {
+        Module m = new Module();
+        m.setName("xx模块");
+        m.setProjectId(1);
+        m.setCreateBy(2);
+        m.setCreateDate(Calendar.getInstance().getTime());
+        id = moduleService.save(m);
+    }
+
+    @Test
+    @Rollback
+    public void testSave() {
+        Module m = new Module();
+        m.setName("xx模块2");
+        m.setProjectId(1);
+        m.setCreateBy(2);
+        m.setCreateDate(Calendar.getInstance().getTime());
+        moduleService.save(m);
+    }
+
+    @Test
+    public void testGet() {
+        moduleService.get(id);
+    }
+
+    @Test
+    public void testFindByProject() {
+        moduleService.findByProject(1);
+    }
+
+    @Test
+    public void testModify() {
+        Module m = new Module();
+        m.setId(id);
+        m.setName("xx模块修改");
+        m.setModifyBy(1);
+        moduleService.modify(m);
+    }
+
+    @Test
+    public void testDelete() {
+        moduleService.deleteById(id);
+    }
 }
