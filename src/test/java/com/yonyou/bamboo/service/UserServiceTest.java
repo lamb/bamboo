@@ -11,9 +11,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.yonyou.bamboo.model.User;
+import com.yonyou.bamboo.util.ConstantsTest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:bamboo-context.xml")
+@ContextConfiguration(ConstantsTest.BAMBOO_CONTEXT)
 public class UserServiceTest {
 
     @Autowired
@@ -30,11 +31,11 @@ public class UserServiceTest {
 
     @Test
     public void testSave() throws NoSuchAlgorithmException {
-        //TODO咋测试
+        // TODO咋测试
         User user = new User();
         user.setEmail("gaoyang_auto@yonyou.com");
         user.setPassword("123456");
-        //int id = userService.save(user);
-        //System.out.println("id=" + id);
+        // int id = userService.save(user);
+        // System.out.println("id=" + id);
     }
 }

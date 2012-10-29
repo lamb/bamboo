@@ -11,9 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.yonyou.bamboo.model.Jdbc;
+import com.yonyou.bamboo.util.ConstantsTest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:bamboo-context.xml")
+@ContextConfiguration(ConstantsTest.BAMBOO_CONTEXT)
 public class TemplateTest {
 
     @Autowired
