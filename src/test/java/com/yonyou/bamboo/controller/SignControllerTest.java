@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.web.server.MockMvc;
 import org.springframework.test.web.server.setup.MockMvcBuilders;
+import com.yonyou.bamboo.util.ConstantsTest;
 
 public class SignControllerTest {
 
@@ -14,7 +15,7 @@ public class SignControllerTest {
 
     @Before
     public void SetUp() {
-        mvc = MockMvcBuilders.xmlConfigSetup("classpath:bamboo-context.xml", "classpath:bamboo-servlet-context.xml").build();
+        mvc = MockMvcBuilders.xmlConfigSetup(ConstantsTest.BAMBOO_CONTEXT, ConstantsTest.BAMBOO_SERVLET_CONTEXT).build();
     }
 
     @Test
