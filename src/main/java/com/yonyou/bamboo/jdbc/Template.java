@@ -3,14 +3,11 @@ package com.yonyou.bamboo.jdbc;
 import java.beans.PropertyDescriptor;
 import java.util.List;
 import javax.sql.DataSource;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.PropertyAccessorFactory;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -69,21 +66,14 @@ public class Template extends JdbcTemplate {
     }
 
     public <T> T queryForObject(T t, Class<T> type) {
-        try {
-            return namedJdbcTemplate.queryForObject(queryJoin(t), new BeanPropertySqlParameterSource(t), new BeanPropertyRowMapper<T>(type));
-        } catch (EmptyResultDataAccessException e) {
-            log.error(e.getMessage());
-        } catch (IncorrectResultSizeDataAccessException e) {
-            log.error(e.getMessage());
-        }
-        return null;
+        return namedJdbcTemplate.queryForObject(queryJoin(t), new BeanPropertySqlParameterSource(t), new BeanPropertyRowMapper<T>(type));
     }
 
     public <T> List<T> query(T t, Class<T> type) {
         return namedJdbcTemplate.query(queryJoin(t), new BeanPropertySqlParameterSource(t), new BeanPropertyRowMapper<T>(type));
     }
 
-    //TODO Template这个类还需要重构
+    // TODO Template这个类还需要重构
     private <T> String queryJoin(T t) {
         StringBuffer sql = new StringBuffer();
         sql.append(SELECT).append(SPACE).append(ASTERISK).append(SPACE);
@@ -141,7 +131,6 @@ public class Template extends JdbcTemplate {
         }
         sql.append(WHERE).append(SPACE).append(IDENTICAL).append(SPACE);
         parameterJoin(where, sql);
-        System.out.println(sql.toString());
         return namedJdbcTemplate.update(sql.toString(), new BeanPropertySqlParameterSource(t));
     }
 
