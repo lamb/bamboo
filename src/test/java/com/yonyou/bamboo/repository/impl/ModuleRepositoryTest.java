@@ -2,11 +2,9 @@ package com.yonyou.bamboo.repository.impl;
 
 import java.util.Calendar;
 import java.util.List;
-
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
-
 import com.yonyou.bamboo.model.Module;
 
 public class ModuleRepositoryTest {
