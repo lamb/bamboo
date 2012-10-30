@@ -1,5 +1,6 @@
 package com.yonyou.bamboo.controller;
 
+import java.util.Calendar;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,11 +52,13 @@ public class ProjectController {
             for (ObjectError error : errors) {
                 System.out.println(error.getDefaultMessage());
             }
+            return "redirect:";
         } else {
             project.setCreateBy(user.getId());
+            project.setCreateDate(Calendar.getInstance().getTime());
             return "redirect:" + projectService.save(project);
         }
-        return "redirect:";
+
     }
 
     @RequestMapping(value = "/{id}/modify", method = RequestMethod.GET)
@@ -72,14 +75,16 @@ public class ProjectController {
             for (ObjectError error : errors) {
                 System.out.println(error.getDefaultMessage());
             }
+            return "redirect:";
         } else {
             project.setId(id);
             project.setModifyBy(user.getId());
             Project where = new Project();
             where.setId(id);
             projectService.update(where, project);
+            return "redirect:" + id;
         }
-        return "redirect:";
+
     }
 
     @RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
