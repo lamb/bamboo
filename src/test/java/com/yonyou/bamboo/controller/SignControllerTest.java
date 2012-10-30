@@ -5,17 +5,31 @@ import static org.springframework.test.web.server.result.MockMvcResultMatchers.*
 import static org.springframework.test.web.server.setup.MockMvcBuilders.standaloneSetup;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.web.server.MockMvc;
 import org.springframework.test.web.server.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
+import com.yonyou.bamboo.loader.WebContextLoader;
 import com.yonyou.bamboo.util.ConstantsTest;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(loader = WebContextLoader.class, locations = { ConstantsTest.BAMBOO_CONTEXT, ConstantsTest.BAMBOO_SERVLET_CONTEXT })
+@TransactionConfiguration
 public class SignControllerTest {
+
+    @Autowired
+    private WebApplicationContext wac;
 
     private MockMvc mvc;
 
     @Before
     public void SetUp() {
-        mvc = MockMvcBuilders.xmlConfigSetup(ConstantsTest.BAMBOO_CONTEXT, ConstantsTest.BAMBOO_SERVLET_CONTEXT).build();
+        this.mvc = MockMvcBuilders.webApplicationContextSetup(this.wac).build();
     }
 
     @Test
@@ -32,7 +46,7 @@ public class SignControllerTest {
 
     @Test
     public void testCookie() throws Exception {
-        mvc.perform(get("/cookie")).andExpect(status().isOk()).andExpect(redirectedUrl("/"));
+        mvc.perform(get("/cookie")).andExpect(status().isOk());
     }
 
 }
