@@ -2,7 +2,6 @@ package com.yonyou.bamboo.controller;
 
 import static org.springframework.test.web.server.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.server.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.server.setup.MockMvcBuilders.standaloneSetup;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,8 +39,8 @@ public class SignControllerTest {
 
     @Test
     public void testSigninValid() throws Exception {
-        MockMvc m = standaloneSetup(new SignController()).build();
-        m.perform(post("/signin").param("email", "email@email.com")).andExpect(status().isOk()).andExpect(model().attributeHasFieldErrors("user", "password"));
+        mvc.perform(post("/signin").param("email", "email@email.com")).andExpect(status().isOk()).andExpect(model().attributeHasFieldErrors("user", "password"));
+        mvc.perform(post("/signin").param("email", "gaoyang_auto@yonyou.com").param("password", "123456")).andExpect(status().isOk());
     }
 
     @Test

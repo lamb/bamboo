@@ -27,7 +27,6 @@ public class SignController {
 
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
     public String signin(@Valid User user, BindingResult result, HttpServletResponse response) throws NoSuchAlgorithmException {
-        // TODO 前端页面验证
         if (result.hasErrors()) {
             List<FieldError> errors = result.getFieldErrors();
             for (FieldError error : errors) {
