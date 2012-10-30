@@ -4,14 +4,14 @@ import java.util.Date;
 
 public class Jdbc {
 
-    Integer id;
-    String name;
-    String abbr;
+    private Integer id;
+    private String name;
+    private String abbr;
     String content;
-    Integer createBy;
-    Date createDate;
-    Integer modifyBy;
-    Date modifyDate;
+    private Integer createBy;
+    private Date createDate;
+    private Integer modifyBy;
+    private Date modifyDate;
 
     public Integer getId() {
         return id;

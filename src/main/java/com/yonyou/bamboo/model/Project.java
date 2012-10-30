@@ -7,18 +7,18 @@ import javax.validation.constraints.NotNull;
 
 public class Project {
 
-    Integer id;
+    private Integer id;
     @NotNull(message = "项目名称不能为空！")
     @Size(max = 100, message = "项目名称最大长度为100")
     // @Pattern(regexp = "[\u4e00-\u9fa5]+", message = "项目名称必须为中文")
-    String name;
+    private String name;
     @NotNull(message = "英文缩写不能为空！")
     @Size(max = 100, message = "英文缩写最大长度为100")
-    String abbr;
-    Integer createBy;
-    Date createDate;
-    Integer modifyBy;
-    Date modifyDate;
+    private String abbr;
+    private Integer createBy;
+    private Date createDate;
+    private Integer modifyBy;
+    private Date modifyDate;
 
     public Integer getId() {
         return id;

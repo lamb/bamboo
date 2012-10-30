@@ -4,30 +4,30 @@ import java.util.Date;
 
 public class Feature {
 
-    Integer id;
-    Integer versionId;
-    Integer moduleId;
-    String checkpoint;
-    String reason;
-    Integer type;
-    Integer hide;
-    Integer alpha;
-    Integer alphaBy;
-    Date alphaDate;
-    Integer betaBy;
-    Integer beta;
-    Date betaDate;
-    Integer uatBy;
-    Integer uat;
-    Date uatDate;
-    String dmlUpgrade;
-    String dmlRollback;
-    String ddlUpgrade;
-    String ddlRollback;
-    Integer createBy;
-    Date createDate;
-    Integer modifyBy;
-    Date modifyDate;
+    private Integer id;
+    private Integer versionId;
+    private Integer moduleId;
+    private String checkpoint;
+    private String reason;
+    private Integer type;
+    private Integer hide;
+    private Integer alpha;
+    private Integer alphaBy;
+    private Date alphaDate;
+    private Integer betaBy;
+    private Integer beta;
+    private Date betaDate;
+    private Integer uatBy;
+    private Integer uat;
+    private Date uatDate;
+    private String dmlUpgrade;
+    private String dmlRollback;
+    private String ddlUpgrade;
+    private String ddlRollback;
+    private Integer createBy;
+    private Date createDate;
+    private Integer modifyBy;
+    private Date modifyDate;
 
     public Integer getId() {
         return id;
