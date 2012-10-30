@@ -37,7 +37,7 @@ public class SignController {
             if (userService.verifyPassword(user.getEmail(), user.getPassword())) {
                 Cookie cookie = new Cookie(Constants.COOKIE_SU, user.getEmail() + ":" + user.getPassword());
                 cookie.setPath("/");
-                cookie.setMaxAge(2 * 3600);
+                cookie.setMaxAge(Integer.MAX_VALUE);
                 response.addCookie(cookie);
             }
         }

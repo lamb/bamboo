@@ -1,18 +1,3 @@
-/*
- * Copyright (c) 2012, *** Team
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.yonyou.bamboo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,55 +13,39 @@ import com.yonyou.bamboo.model.User;
 import com.yonyou.bamboo.service.InviteService;
 import com.yonyou.bamboo.util.ResponseMsg;
 
-/**
- * bamboo InviteController
- *
- * @author <a href="http://www.noday.net">Noday</a>
- * @version , 2012-10-9
- * @since 
- */
-@Controller @RequestMapping("/invite")
+@Controller
+@RequestMapping("/invite")
 public class InviteController {
 
-	@Autowired private InviteService inviteService;
-	/**
-	 * 邀请页面
-	 * @return
-	 */
-	@RequestMapping(method = RequestMethod.GET)
-	public String invite(Model model) {
-	    User user = new User();
-	    user.setEmail("lamb@me.com");
-	    user.setPassword("!#@32中文");
-	    model.addAttribute("user", user);
-		return "inviter";
-	}
-	/**
-	 * 发出邀请
-	 * @param email
-	 * @return
-	 */
-	@RequestMapping(method = RequestMethod.POST) @ResponseBody
-	public ResponseMsg invite(@RequestParam("email") String email) {
-		try {
-			inviteService.addInvite(email);
-		} catch (Exception e) {
-			return new ResponseMsg().error(e.getMessage());
-		}
-		return new ResponseMsg().success();
-	}
-	/**
-	 * 接受邀请并去注册页面
-	 * @param inviteNo
-	 * @param m
-	 * @return
-	 */
-	@RequestMapping("/{inviteNo}")
-	public ModelAndView register(@PathVariable("inviteNo") String inviteNo, ModelAndView m) {
-		// TODO 验证邀请码并找到email放到页面里
-		m.addObject("inviteNo", inviteNo);
-		m.addObject("email", "at1943@gmail.com");
-		m.setViewName("inviteRegist");
-		return m;
-	}
+    @Autowired
+    private InviteService inviteService;
+
+    @RequestMapping(method = RequestMethod.GET)
+    public String invite(Model model) {
+        User user = new User();
+        user.setEmail("lamb@me.com");
+        user.setPassword("!#@32中文");
+        model.addAttribute("user", user);
+        return "inviter";
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseMsg invite(@RequestParam("email") String email) {
+        try {
+            inviteService.addInvite(email);
+        } catch (Exception e) {
+            return new ResponseMsg().error(e.getMessage());
+        }
+        return new ResponseMsg().success();
+    }
+
+    @RequestMapping("/{inviteNo}")
+    public ModelAndView register(@PathVariable("inviteNo") String inviteNo, ModelAndView m) {
+        // TODO 验证邀请码并找到email放到页面里
+        m.addObject("inviteNo", inviteNo);
+        m.addObject("email", "at1943@gmail.com");
+        m.setViewName("inviteRegist");
+        return m;
+    }
 }

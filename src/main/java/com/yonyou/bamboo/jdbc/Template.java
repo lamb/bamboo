@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.PropertyAccessorFactory;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -61,7 +60,7 @@ public class Template extends JdbcTemplate {
         this.namedJdbcTemplate = new NamedParameterJdbcTemplate(this);
     }
 
-    public int update(String sql, SqlParameterSource paramSource, KeyHolder generatedKeyHolder) throws DataAccessException {
+    public int update(String sql, SqlParameterSource paramSource, KeyHolder generatedKeyHolder) {
         return namedJdbcTemplate.update(sql, paramSource, generatedKeyHolder);
     }
 
@@ -181,13 +180,6 @@ public class Template extends JdbcTemplate {
         return keyHolder.getKey().intValue();
     }
 
-    /**
-     * Convert a name in camelCase to an underscored name in lower case. Any upper case letters are converted to lower case with a preceding underscore.
-     * 
-     * @param name
-     *            the string containing original name
-     * @return the converted name
-     */
     private String underscoreName(String name) {
         StringBuilder result = new StringBuilder();
         if (name != null && name.length() > 0) {

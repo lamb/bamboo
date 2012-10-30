@@ -14,7 +14,7 @@ public class FeatureController {
     public String list() {
         return "feature/list";
     }
-    
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String show(@PathVariable int id) {
         return "feature/show";

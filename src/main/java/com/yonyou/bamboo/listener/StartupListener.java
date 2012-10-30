@@ -5,10 +5,6 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import org.apache.log4j.Logger;
 
-/**
- * Application Lifecycle Listener implementation class StartupListener
- * 
- */
 public class StartupListener implements ServletContextListener {
 
     private static Logger log = Logger.getLogger(StartupListener.class);

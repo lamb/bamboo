@@ -5,15 +5,17 @@ import java.util.Date;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.NotNull;
 
+import com.yonyou.bamboo.util.Constants;
+
 public class Project {
 
     private Integer id;
     @NotNull(message = "项目名称不能为空！")
-    @Size(max = 100, message = "项目名称最大长度为100")
+    @Size(max = Constants.HUNDRED, message = "项目名称最大长度为100")
     // @Pattern(regexp = "[\u4e00-\u9fa5]+", message = "项目名称必须为中文")
     private String name;
     @NotNull(message = "英文缩写不能为空！")
-    @Size(max = 100, message = "英文缩写最大长度为100")
+    @Size(max = Constants.HUNDRED, message = "英文缩写最大长度为100")
     private String abbr;
     private Integer createBy;
     private Date createDate;
