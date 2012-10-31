@@ -11,7 +11,7 @@ import com.yonyou.bamboo.repository.IProjectRepository;
 public class ProjectRepository implements IProjectRepository {
 
     @Autowired
-    Template template;
+    private Template template;
 
     @Override
     public List<Project> query(Project project, Class<Project> type) {

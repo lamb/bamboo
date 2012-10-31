@@ -27,7 +27,7 @@ public class SignControllerTest {
     private MockMvc mvc;
 
     @Before
-    public void SetUp() {
+    public void setUp() {
         this.mvc = MockMvcBuilders.webApplicationContextSetup(this.wac).build();
     }
 

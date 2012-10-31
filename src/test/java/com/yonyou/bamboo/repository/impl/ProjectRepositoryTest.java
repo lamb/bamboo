@@ -69,7 +69,7 @@ public class ProjectRepositoryTest {
     @Test
     public void testUpdate() {
         Project where = new Project();
-        where.setId(999999);
+        where.setId(Integer.MAX_VALUE);
         Project project = new Project();
         project.setAbbr("aa");
         project.setName("bbbb");
@@ -79,7 +79,7 @@ public class ProjectRepositoryTest {
     @Test
     public void testDelete() {
         Project project = new Project();
-        project.setId(999999);
+        project.setId(Integer.MAX_VALUE);
         assertThat(projectRepository.delete(project), is(0));
     }
 

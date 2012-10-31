@@ -2,7 +2,10 @@ package com.yonyou.bamboo.util;
 
 import javax.servlet.http.Cookie;
 
-public class CookieUtil {
+public final class CookieUtil {
+
+    private CookieUtil() {
+    }
 
     public static String getValue(Cookie[] cookies, String name) {
         String value = null;

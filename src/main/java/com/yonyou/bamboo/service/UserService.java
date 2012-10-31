@@ -2,35 +2,28 @@ package com.yonyou.bamboo.service;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.yonyou.bamboo.model.User;
 import com.yonyou.bamboo.repository.IUserRepository;
+import com.yonyou.bamboo.util.Constants;
 import com.yonyou.bamboo.util.CryptoUtil;
 
 @Service
 public class UserService {
 
     @Autowired
-    IUserRepository userRepository;
+    private IUserRepository userRepository;
 
     @Transactional(readOnly = true)
-    public boolean verifyPassword(String email, String password) throws NoSuchAlgorithmException {
+    public boolean verifyPassword(String email, String password) {
         boolean flag = false;
-        try {
-            String verify = userRepository.getPassword(email);
-            if (null != verify && null != password) {
-                if (password.equals(verify)) {
-                    flag = true;
-                }
+        String verify = userRepository.getPassword(email);
+        if (null != verify && null != password) {
+            if (password.equals(verify)) {
+                flag = true;
             }
-        } catch (EmptyResultDataAccessException e) {
-        } catch (IncorrectResultSizeDataAccessException e) {
         }
         return flag;
     }
@@ -38,7 +31,7 @@ public class UserService {
     @Transactional
     public int save(User user) throws NoSuchAlgorithmException {
         Random random = new Random();
-        user.setSalt(random.nextInt(99999));
+        user.setSalt(random.nextInt(Constants.SALT));
         user.setPassword(CryptoUtil.digest(user.getPassword(), user.getSalt()));
         user.setUsername("yonyou");
         return userRepository.save(user);
@@ -51,13 +44,7 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public int getSalt(String email) {
-        int salt = 99999;
-        try {
-            salt = userRepository.getSalt(email);
-        } catch (EmptyResultDataAccessException e) {
-        } catch (IncorrectResultSizeDataAccessException e) {
-        }
-        return salt;
+        return userRepository.getSalt(email);
     }
 
 }

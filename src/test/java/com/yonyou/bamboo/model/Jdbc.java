@@ -7,7 +7,7 @@ public class Jdbc {
     private Integer id;
     private String name;
     private String abbr;
-    String content;
+    private String content;
     private Integer createBy;
     private Date createDate;
     private Integer modifyBy;

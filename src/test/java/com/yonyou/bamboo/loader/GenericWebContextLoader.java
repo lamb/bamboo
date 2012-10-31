@@ -16,10 +16,16 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.GenericWebApplicationContext;
 
 public class GenericWebContextLoader extends AbstractContextLoader {
-    protected final MockServletContext servletContext;
+
+    private final MockServletContext servletContext;
 
     public GenericWebContextLoader(String warRootDir, boolean isClasspathRelative) {
-        ResourceLoader resourceLoader = isClasspathRelative ? new DefaultResourceLoader() : new FileSystemResourceLoader();
+        ResourceLoader resourceLoader;
+        if (isClasspathRelative) {
+            resourceLoader = new DefaultResourceLoader();
+        } else {
+            resourceLoader = new FileSystemResourceLoader();
+        }
         this.servletContext = initServletContext(warRootDir, resourceLoader);
     }
 
@@ -27,7 +33,13 @@ public class GenericWebContextLoader extends AbstractContextLoader {
         return new MockServletContext(warRootDir, resourceLoader) {
             // Required for DefaultServletHttpRequestHandler...
             public RequestDispatcher getNamedDispatcher(String path) {
-                return (path.equals("default")) ? new MockRequestDispatcher(path) : super.getNamedDispatcher(path);
+                RequestDispatcher dispatcher;
+                if ("default".equals(path)) {
+                    dispatcher = new MockRequestDispatcher(path);
+                } else {
+                    dispatcher = super.getNamedDispatcher(path);
+                }
+                return dispatcher;
             }
         };
     }

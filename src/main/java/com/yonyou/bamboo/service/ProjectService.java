@@ -11,7 +11,7 @@ import com.yonyou.bamboo.repository.IProjectRepository;
 public class ProjectService {
 
     @Autowired
-    IProjectRepository projectRepository;
+    private IProjectRepository projectRepository;
 
     @Transactional(readOnly = true)
     public List<Project> query(Project project, Class<Project> type) {

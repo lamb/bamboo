@@ -15,9 +15,9 @@ import com.yonyou.bamboo.repository.IUserRepository;
 public class UserRepository implements IUserRepository {
 
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
     @Autowired
-    NamedParameterJdbcTemplate namedJdbcTemplate;
+    private NamedParameterJdbcTemplate namedJdbcTemplate;
 
     @Override
     public String getPassword(String email) {

@@ -12,12 +12,10 @@ public class CryptoUtilTest {
     public void testDigest() throws NoSuchAlgorithmException {
         assertEquals("bf9661defa3daecacfde5bde0214c4a439351d4d", CryptoUtil.digest("sss"));
     }
-    
+
     @Test
     public void testByte2hex() throws NoSuchAlgorithmException {
-        new CryptoUtil();
         assertEquals("", CryptoUtil.byte2hex(null));
     }
-    
 
 }

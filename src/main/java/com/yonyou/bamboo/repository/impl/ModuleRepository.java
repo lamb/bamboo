@@ -17,9 +17,9 @@ import com.yonyou.bamboo.model.Module;
 public class ModuleRepository {
 
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
     @Autowired
-    NamedParameterJdbcTemplate namedJdbcTemplate;
+    private NamedParameterJdbcTemplate namedJdbcTemplate;
 
     public int save(Module module) {
         String sql = "insert into module(project_id,name,create_by,create_date)" + " values(:projectId,:name,:createBy,:createDate)";

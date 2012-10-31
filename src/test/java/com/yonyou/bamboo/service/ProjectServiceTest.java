@@ -67,7 +67,7 @@ public class ProjectServiceTest {
     @Transactional
     public void testUpdate() {
         Project where = new Project();
-        where.setId(999999);
+        where.setId(Integer.MAX_VALUE);
         Project project = new Project();
         project.setAbbr("aa");
         project.setName("bbbb");
@@ -78,7 +78,7 @@ public class ProjectServiceTest {
     @Transactional
     public void testDelete() {
         Project project = new Project();
-        project.setId(999999);
+        project.setId(Integer.MAX_VALUE);
         assertThat(projectService.delete(project), is(0));
     }
 

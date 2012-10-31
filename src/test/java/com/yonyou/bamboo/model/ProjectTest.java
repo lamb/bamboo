@@ -7,6 +7,7 @@ import org.junit.Test;
 public class ProjectTest {
 
     private Project project;
+
     @Before
     public void setUp() throws Exception {
         project = new Project();
@@ -21,7 +22,7 @@ public class ProjectTest {
         project.getModifyBy();
         project.getModifyDate();
         project.getName();
-        
+
         project.setId(1);
         project.setAbbr("a");
         project.setCreateBy(-1);

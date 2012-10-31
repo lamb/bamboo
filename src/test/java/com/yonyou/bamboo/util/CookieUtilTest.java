@@ -9,8 +9,7 @@ public class CookieUtilTest {
 
     @Test
     public void testGetValue() {
-        new CookieUtil();
-        Cookie[] cookies = new Cookie[5];
+        Cookie[] cookies = new Cookie[Constants.HUNDRED];
         for (int i = 0; i < cookies.length; i++) {
             Cookie cookie = new Cookie("c" + i, "c" + i);
             cookies[i] = cookie;

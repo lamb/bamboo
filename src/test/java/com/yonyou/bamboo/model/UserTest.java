@@ -3,6 +3,8 @@ package com.yonyou.bamboo.model;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.yonyou.bamboo.util.Constants;
+
 public class UserTest {
 
     private User user;
@@ -23,7 +25,7 @@ public class UserTest {
         user.setEmail("111");
         user.setPassword("111");
         user.setUsername("username");
-        user.setSalt(74328);
+        user.setSalt(Constants.SALT);
     }
 
 }

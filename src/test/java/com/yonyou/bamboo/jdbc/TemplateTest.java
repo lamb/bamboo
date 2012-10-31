@@ -5,6 +5,8 @@ import static org.hamcrest.Matchers.is;
 import java.util.Date;
 import java.util.List;
 import javax.sql.DataSource;
+
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +25,11 @@ public class TemplateTest {
     @Autowired
     private DataSource dataSource;
 
-    //TODO before先建立这样一张测试表，after再删除
-    
+    @BeforeClass
+    public static void setUpBeforeClass() throws Exception {
+        // TODO before先建立这样一张测试表，after再删除
+    }
+
     @Test
     public void testTemplate() {
         new Template();
@@ -90,14 +95,14 @@ public class TemplateTest {
     @Test
     public void testDelete() throws Exception {
         Jdbc jdbc = new Jdbc();
-        jdbc.setId(999999);
+        jdbc.setId(Integer.MAX_VALUE);
         assertThat(template.delete(jdbc), is(0));
     }
 
     @Test
     public void testUpdate() throws Exception {
         Jdbc where = new Jdbc();
-        where.setId(999999);
+        where.setId(Integer.MAX_VALUE);
         Jdbc jdbc = new Jdbc();
         jdbc.setAbbr("aa");
         jdbc.setName("bbbb");

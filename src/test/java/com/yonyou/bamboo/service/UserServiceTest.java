@@ -21,7 +21,7 @@ public class UserServiceTest {
     private UserService userService;
 
     @Before
-    public void SetUp() {
+    public void setUp() {
     }
 
     @Test

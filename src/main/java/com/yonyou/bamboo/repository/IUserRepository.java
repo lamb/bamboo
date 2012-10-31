@@ -4,12 +4,12 @@ import com.yonyou.bamboo.model.User;
 
 public interface IUserRepository {
 
-    public String getPassword(String email);
+    String getPassword(String email);
 
-    public User get(String email);
-    
-    public int getSalt(String email);
-    
-    public int save(User user);
+    User get(String email);
+
+    int getSalt(String email);
+
+    int save(User user);
 
 }

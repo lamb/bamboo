@@ -19,7 +19,7 @@ public class ConstantsTest {
 
     @Test
     public void test() {
-        new Constants();
+        //new Constants();
         assertEquals("Bamboo", Constants.PROJECT_NAME);
     }
 
