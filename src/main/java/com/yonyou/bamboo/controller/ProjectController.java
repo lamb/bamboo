@@ -82,7 +82,7 @@ public class ProjectController {
             Project where = new Project();
             where.setId(id);
             projectService.update(where, project);
-            return "redirect:" + id;
+            return "redirect:";
         }
 
     }
