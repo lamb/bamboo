@@ -27,6 +27,7 @@ public class SignController {
 
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
     public String signin(@Valid User user, BindingResult result, HttpServletResponse response) throws NoSuchAlgorithmException {
+    System.out.println("signin start");
         if (result.hasErrors()) {
             List<FieldError> errors = result.getFieldErrors();
             for (FieldError error : errors) {
@@ -41,6 +42,7 @@ public class SignController {
                 response.addCookie(cookie);
             }
         }
+        System.out.println("signin end");
         return "redirect:/";
     }
 
