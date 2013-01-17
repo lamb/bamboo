@@ -16,7 +16,7 @@ import com.yonyou.bamboo.model.Project;
 import com.yonyou.bamboo.util.ConstantsTest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(ConstantsTest.BAMBOO_CONTEXT)
+@ContextConfiguration({ ConstantsTest.BAMBOO_CONTEXT, ConstantsTest.BAMBOO_SERVLET_CONTEXT })
 @TransactionConfiguration
 public class ProjectServiceTest {
 
