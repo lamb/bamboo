@@ -5,8 +5,12 @@
 *.war
 *.ear
 
+# IDE Config Files #
 .settings/
-target/
+.project
+.classpath
+.idea
+*.iml
 
-*.project
-*.classpath
+# Maven Files #
+target
