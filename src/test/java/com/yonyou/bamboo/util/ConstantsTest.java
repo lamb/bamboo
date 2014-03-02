@@ -6,8 +6,8 @@ import com.yonyou.bamboo.model.User;
 
 public class ConstantsTest {
 
-    public static final String BAMBOO_CONTEXT = "classpath:bamboo-context.xml";
-    public static final String BAMBOO_SERVLET_CONTEXT = "classpath:bamboo-servlet-context.xml";
+    public static final String BAMBOO_CONTEXT = "classpath:context.xml";
+    public static final String BAMBOO_SERVLET_CONTEXT = "classpath:servlet-context.xml";
     public static final String WEB_ROOT = "src/main/webapp";
     public static final User USER = new User();
 

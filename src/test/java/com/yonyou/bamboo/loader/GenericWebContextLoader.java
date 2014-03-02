@@ -76,7 +76,7 @@ public class GenericWebContextLoader extends AbstractContextLoader {
 
     @Override
     protected String getResourceSuffix() {
-        return "-context.xml";
+        return "context.xml";
     }
 
 }
