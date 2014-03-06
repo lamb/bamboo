@@ -33,7 +33,7 @@ public class UserService {
         Random random = new Random();
         user.setSalt(random.nextInt(Constants.SALT));
         user.setPassword(CryptoUtil.digest(user.getPassword(), user.getSalt()));
-        user.setUsername("yonyou");
+        user.setUsername("xxxxx");
         return userRepository.save(user);
     }
 
