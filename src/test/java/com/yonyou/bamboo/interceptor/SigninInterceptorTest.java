@@ -10,7 +10,7 @@ public class SigninInterceptorTest {
         // TODO 这个怎么测，有待研究
         new SigninInterceptor().preHandle(null, null, null);
         fail("Not yet implemented");
-        //xxx
+        //xxxxx
     }
 
 }
